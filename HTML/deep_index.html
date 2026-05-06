@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>HTML Mastery: Basics to Advanced Tags & Examples</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: linear-gradient(145deg, #f6f9fc 0%, #eef2f5 100%);
+        font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        line-height: 1.5;
+        padding: 2rem 1rem;
+        color: #1a2a3f;
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.92);
+        border-radius: 2rem;
+        box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.25);
+        overflow: hidden;
+        backdrop-filter: blur(0px);
+      }
+
+      header {
+        background: #0b2b40;
+        color: white;
+        padding: 2rem 2rem 1.8rem;
+        text-align: center;
+        border-bottom: 6px solid #ffb347;
+      }
+
+      header h1 {
+        font-size: 2.6rem;
+        letter-spacing: -0.5px;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+      }
+
+      header p {
+        font-size: 1.2rem;
+        opacity: 0.9;
+        max-width: 700px;
+        margin: 0 auto;
+      }
+
+      .note-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        padding: 2rem;
+      }
+
+      .card {
+        background: #ffffff;
+        border-radius: 1.5rem;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+        transition: all 0.2s;
+        overflow: hidden;
+        border: 1px solid #e2edf2;
+      }
+
+      .card-header {
+        background: #fef7e8;
+        padding: 1rem 1.8rem;
+        border-bottom: 2px solid #ffd966;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        flex-wrap: wrap;
+      }
+
+      .card-header h2 {
+        font-size: 1.7rem;
+        font-weight: 600;
+        color: #2c5a6e;
+        letter-spacing: -0.3px;
+      }
+
+      .badge {
+        background: #ffb34720;
+        color: #b45f06;
+        padding: 0.25rem 1rem;
+        border-radius: 40px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        font-family: monospace;
+      }
+
+      .card-body {
+        padding: 1.5rem 1.8rem;
+      }
+
+      .topic {
+        margin-bottom: 2rem;
+        border-left: 4px solid #ffb347;
+        padding-left: 1.2rem;
+      }
+
+      .topic h3 {
+        font-size: 1.4rem;
+        margin-bottom: 0.75rem;
+        color: #1e4a62;
+        display: inline-block;
+        background: linear-gradient(120deg, #f5f0e6, transparent);
+        padding-right: 1rem;
+      }
+
+      .desc {
+        color: #2c3e4e;
+        margin-bottom: 1rem;
+        font-size: 0.95rem;
+      }
+
+      .code-block {
+        background: #1e2a36;
+        color: #eef4ff;
+        padding: 1rem 1.2rem;
+        border-radius: 1rem;
+        overflow-x: auto;
+        font-family: 'JetBrains Mono', 'Fira Code', monospace;
+        font-size: 0.85rem;
+        margin: 1rem 0 1.2rem;
+        box-shadow: inset 0 0 0 1px #3a4a5a, 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .code-block code {
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+
+      .demo-out {
+        background: #faf9f5;
+        border: 1px dashed #cbdbe2;
+        border-radius: 1rem;
+        padding: 1rem;
+        margin-top: 0.5rem;
+        transition: background 0.2s;
+      }
+
+      .demo-out p,
+      .demo-out div,
+      .demo-out span,
+      .demo-out ul {
+        font-size: 0.9rem;
+      }
+
+      hr {
+        margin: 1rem 0;
+        border: none;
+        height: 1px;
+        background: linear-gradient(to right, #ccc, transparent);
+      }
+
+      footer {
+        background: #0b2b40;
+        color: #bbd4e3;
+        text-align: center;
+        padding: 1.2rem;
+        font-size: 0.85rem;
+        border-top: 1px solid #2f5f72;
+      }
+
+      a {
+        color: #ffb347;
+        text-decoration: none;
+      }
+
+      @media (max-width: 700px) {
+        .note-grid {
+          padding: 1rem;
+        }
+        .card-header h2 {
+          font-size: 1.3rem;
+        }
+        .code-block {
+          font-size: 0.75rem;
+        }
+      }
+
+      button.toggle-demo {
+        background: none;
+        border: none;
+        font-size: 0.8rem;
+        cursor: pointer;
+        margin-left: 1rem;
+        color: #b45f06;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>📘 HTML Deep Dive</h1>
+        <p>
+          from foundation &nbsp;▸&nbsp; semantic elements &nbsp;▸&nbsp; forms &
+          media &nbsp;▸&nbsp; modern APIs & advanced patterns
+        </p>
+        <p style="font-size: 0.9rem; margin-top: 0.6rem">
+          ✨ interactive examples — each snippet is live HTML/CSS ✨
+        </p>
+      </header>
+
+      <div class="note-grid">
+        <!-- SECTION 1: BASICS -->
+        <div class="card">
+          <div class="card-header">
+            <h2>🌱 Level 1: Essential HTML & Document structure</h2>
+            <span class="badge">fundamental tags</span>
+          </div>
+          <div class="card-body">
+            <div class="topic">
+              <h3>📄 Doctype & Core skeleton</h3>
+              <div class="desc">
+                Every HTML document begins with
+                <code>&lt;!DOCTYPE html&gt;</code> followed by
+                <code>&lt;html&gt;</code>, <code>&lt;head&gt;</code>,
+                <code>&lt;body&gt;</code>. Meta tags control viewport &
+                character set.
+              </div>
+              <div class="code-block">
+                <code
+                  >&lt;!DOCTYPE html&gt;<br />
+                  &lt;html lang="en"&gt;<br />
+                  &lt;head&gt;<br />
+                  &nbsp;&nbsp;&lt;meta charset="UTF-8"&gt;<br />
+                  &nbsp;&nbsp;&lt;meta name="viewport"
+                  content="width=device-width, initial-scale=1.0"&gt;<br />
+                  &nbsp;&nbsp;&lt;title&gt;Document structure&lt;/title&gt;<br />
+                  &lt;/head&gt;<br />
+                  &lt;body&gt;<br />
+                  &nbsp;&nbsp;&lt;h1&gt;Hello HTML&lt;/h1&gt;<br />
+                  &nbsp;&nbsp;&lt;p&gt;This is a basic page
+                  skeleton.&lt;/p&gt;<br />
+                  &lt;/body&gt;<br />
+                  &lt;/html&gt;</code
+                >
+              </div>
+            </div>
+
+            <div class="topic">
+              <h3>🔤 Headings & Paragraphs</h3>
+              <div class="desc">
+                <code>&lt;h1&gt;...&lt;h6&gt;</code> for hierarchical titles,
+                <code>&lt;p&gt;</code> for text blocks.
+                <code>&lt;br&gt;</code> line break,
+                <code>&lt;hr&gt;</code> horizontal rule.
+              </div>
+              <div class="code-block">
+                <code
+                  >&lt;h1&gt;Main title&lt;/h1&gt;<br />
+                  &lt;h2&gt;Subheading&lt;/h2&gt;<br />
+                  &lt;p&gt;This is a paragraph with
+                  &lt;strong&gt;bold&lt;/strong&gt; and
+                  &lt;em&gt;italic&lt;/em&gt;.&lt;br&gt;Line break
+                  here.&lt;/p&gt;<br />
+                  &lt;hr&gt;</code
+                >
+              </div>
+              <div class="demo-out">
+                <h1 style="margin: 0; font-size: 1.4rem">Main title</h1>
+                <h2 style="margin: 0.2rem 0; font-size: 1.2rem">Subheading</h2>
+                <p>
+                  This is a paragraph with <strong>bold</strong> and
+                  <em>italic</em>.<br />Line break here.
+                </p>
+                <hr style="margin: 0.3rem 0" />
+              </div>
+            </div>
+
+            <div class="topic">
+              <h3>🔗 Links & Images</h3>
+              <div class="desc">
+                <code>&lt;a&gt;</code> anchor tags create hyperlinks,
+                <code>&lt;img&gt;</code> embeds images (self-closing).
+                Attributes: href, src, alt, target.
+              </div>
+              <div class="code-block">
+                <code
+                  >&lt;a href="https://example.com" target="_blank"&gt;Visit
+                  Example&lt;/a&gt;<br />
+                  &lt;img src="https://picsum.photos/id/1/150/100" alt="Random
+                  mountain" width="150" height="100"&gt;</code
+                >
+              </div>
+              <div class="demo-out">
+                <a href="#" style="color: #2c5a6e"
+                  >🔗 Example link (placeholder)</a
+                ><br />
+                <img
+                  src="https://picsum.photos/id/104/150/100"
+                  alt="Nature shot"
+                  style="border-radius: 12px; margin-top: 8px"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 2: LISTS, TABLES, BLOCK & INLINE -->
+        <div class="card">
+          <div class="card-header">
+            <h2>📋 Level 2: Lists, Tables & Grouping</h2>
+            <span class="badge">intermediate layout</span>
+          </div>
+          <div class="card-body">
+            <div class="topic">
+              <h3>📌 Unordered / Ordered lists</h3>
+              <div class="code-block">
+                <code
+                  >&lt;ul&gt;<br />
+                  &lt;li&gt;Apples&lt;/li&gt;<br />
+                  &lt;li&gt;Bananas&lt;/li&gt;<br />&lt;/ul&gt;<br />&lt;ol&gt;<br />
+                  &lt;li&gt;Step 1&lt;/li&gt;<br />
+                  &lt;li&gt;Step 2&lt;/li&gt;<br />&lt;/ol&gt;</code
+                >
+              </div>
+              <div class="demo-out">
+                <ul style="margin-left: 1rem">
+                  <li>Apples</li>
+                  <li>Bananas</li>
+                </ul>
+                <ol style="margin-left: 1rem">
+                  <li>Step 1</li>
+                  <li>Step 2</li>
+                </ol>
+              </div>
+            </div>
+
+            <div class="topic">
+              <h3>📊 Tables (advanced: thead, tbody, colspan)</h3>
+              <div class="code-block">
+                <code
+                  >&lt;table border="1" cellpadding="6"&gt;<br />
+                  &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Score&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;<br />
+                  &lt;tbody&gt;&lt;tr&gt;&lt;td&gt;Alice&lt;/td&gt;&lt;td&gt;95&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;<br />&lt;/table&gt;</code
+                >
+              </div>
+              <div class="demo-out">
+                <table
+                  border="1"
+                  cellpadding="6"
+                  style="border-collapse: collapse; background: #fff"
+                >
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Score</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Alice</td>
+                      <td>95</td>
+                    </tr>
+                    <tr>
+                      <td>Bob</td>
+                      <td>88</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="topic">
+              <h3>🧱 Div & Span (block vs inline)</h3>
+              <div class="desc">
+                <code>&lt;div&gt;</code> block-level container,
+                <code>&lt;span&gt;</code> inline container for styling or
+                scripting.
+              </div>
+              <div class="code-block">
+                <code
+                  >&lt;div style="background:#eef2fa; padding:0.5rem;"&gt;Block
+                  div&lt;/div&gt;<br />&lt;p&gt;Text with &lt;span
+                  style="color:#c60;"&gt;colored span&lt;/span&gt;
+                  inside.&lt;/p&gt;</code
+                >
+              </div>
+              <div class="demo-out">
+                <div
+                  style="
+                    background: #eef2fa;
+                    padding: 0.5rem;
+                    border-radius: 8px;
+                  "
+                >
+                  Block div
+                </div>
+                <p>
+                  Text with
+                  <span style="color: #c60; font-weight: bold"
+                    >colored span</span
+                  >
+                  inside.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 3: FORMS & INPUTS -->
+        <div class="card">
+          <div class="card-header">
+            <h2>📝 Level 3: Forms & Interactive Controls</h2>
+            <span class="badge">user input</span>
+          </div>
+          <div class="card-body">
+            <div class="topic">
+              <h3>🧾 Form elements: input, select, textarea, button</h3>
+              <div class="desc">
+                Collect user data with <code>&lt;form&gt;</code>. Different
+                input types: text, email, number, password, radio, checkbox,
+                file, date, etc.
+              </div>
+              <div class="code-block">
+                <code
+                  >&lt;form action="#"&gt;<br />
+                  &nbsp;&lt;label&gt;Name: &lt;input type="text" name="username"
+                  placeholder="e.g., Jane"&gt;&lt;/label&gt;&lt;br&gt;<br />
+                  &nbsp;&lt;label&gt;&lt;input type="radio" name="gender"&gt;
+                  Male&lt;/label&gt;<br />
+                  &nbsp;&lt;label&gt;Feedback: &lt;textarea
+                  rows="2"&gt;&lt;/textarea&gt;&lt;/label&gt;<br />
+                  &nbsp;&lt;select&gt;&lt;option&gt;Option
+                  A&lt;/option&gt;&lt;/select&gt;<br />
+                  &nbsp;&lt;button type="submit"&gt;Send&lt;/button&gt;<br />
+                  &lt;/form&gt;</code
+                >
+              </div>
+              <div class="demo-out">
+                <form
+                  onsubmit="alert('demo: form would submit'); return false;"
+                  style="
+                    display: flex;
+                    flex-direction: column;
+                    gap: 8px;
+                    max-width: 300px;
+                  "
+                >
+                  <label
+                    >Name:
+                    <input
+                      type="text"
+                      placeholder="e.g., Jane"
+                      style="width: 100%"
+                  /></label>
+                  <label><input type="radio" name="gender" /> Male</label>
+                  <label
+                    >Feedback:
+                    <textarea rows="2" style="width: 100%"></textarea>
+                  </label>
+                  <select>
+                    <option>Option A</option>
+                    <option>Option B</option>
+                  </select>
+                  <button
+                    type="submit"
+                    style="
+                      background: #ffb347;
+                      border: none;
+                      padding: 6px;
+                      border-radius: 20px;
+                    "
+                  >
+                    Send
+                  </button>
+                </form>
+              </div>
+            </div>
+            <div class="topic">
+              <h3>🎛️ HTML5 Input types & attributes</h3>
+              <div class="desc">
+                email, number, range, date, required, pattern.
+              </div>
+              <div class="code-block">
+                <code
+                  >&lt;input type="email" placeholder="you@example.com"
+                  required&gt;<br />
+                  &lt;input type="range" min="0" max="100"&gt;<br />
+                  &lt;input type="date"&gt;</code
+                >
+              </div>
+              <div class="demo-out">
+                <input
+                  type="email"
+                  placeholder="you@example.com"
+                  style="margin: 4px"
+                /><br />
+                <input type="range" min="0" max="100" value="50" /><br />
+                <input type="date" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 4: SEMANTIC HTML & ACCESSIBILITY -->
+        <div class="card">
+          <div class="card-header">
+            <h2>♿ Level 4: Semantic Elements & Accessibility</h2>
+            <span class="badge">modern HTML5</span>
+          </div>
+          <div class="card-body">
+            <div class="topic">
+              <h3>🏷️ Header, Nav, Main, Article, Section, Aside, Footer</h3>
+              <div class="desc">
+                Semantic tags improve SEO, screen reader navigation, and code
+                clarity.
+              </div>
+              <div class="code-block">
+                <code
+                  >&lt;header&gt;Site header&lt;/header&gt;<br />
+                  &lt;nav&gt;&lt;a href="#"&gt;Home&lt;/a&gt; &lt;a
+                  href="#"&gt;About&lt;/a&gt;&lt;/nav&gt;<br />
+                  &lt;main&gt;<br />
+                  &nbsp;&lt;article&gt;&lt;h2&gt;Blog
+                  post&lt;/h2&gt;&lt;p&gt;Content...&lt;/p&gt;&lt;/article&gt;<br />
+                  &nbsp;&lt;aside&gt;Related links&lt;/aside&gt;<br />
+                  &lt;/main&gt;<br />
+                  &lt;footer&gt;&copy; 2025&lt;/footer&gt;</code
+                >
+              </div>
+              <div class="demo-out" style="background: #fff7ea">
+                <header style="font-weight: bold">📌 Site header</header>
+                <nav style="margin: 4px 0">
+                  <a href="#">Home</a> | <a href="#">About</a>
+                </nav>
+                <main
+                  style="background: #fcf9f0; padding: 6px; border-radius: 8px"
+                >
+                  <article>
+                    <h3 style="margin: 0">Blog insight</h3>
+                    <p>Using semantic layout helps.</p>
+                  </article>
+                  <aside style="font-size: 0.8rem">
+                    💡 Tip: Use landmark roles
+                  </aside>
+                </main>
+                <footer style="margin-top: 6px">© 2025 HTML Academy</footer>
+              </div>
+            </div>
+            <div class="topic">
+              <h3>🌐 ARIA basics (roles & labels)</h3>
+              <div class="desc">
+                Enhance accessibility for dynamic content:
+                <code>aria-label</code>, <code>role</code>,
+                <code>aria-hidden</code>.
+              </div>
+              <div class="code-block">
+                <code
+                  >&lt;button aria-label="Close dialog"&gt;✖&lt;/button&gt;<br />
+                  &lt;div role="alert"&gt;Error message&lt;/div&gt;</code
+                >
+              </div>
+              <div class="demo-out">
+                <button
+                  aria-label="Close dialog"
+                  style="
+                    background: #ddd;
+                    border: none;
+                    border-radius: 20px;
+                    padding: 5px 12px;
+                  "
+                >
+                  ✖
+                </button>
+                <div
+                  role="alert"
+                  style="
+                    background: #ffe0e0;
+                    border-left: 4px solid red;
+                    margin-top: 6px;
+                    padding: 4px;
+                  "
+                >
+                  ⚠️ Error: invalid input
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 5: MULTIMEDIA & EMBEDDED -->
+        <div class="card">
+          <div class="card-header">
+            <h2>🎥 Level 5: Media, Canvas & Embedding</h2>
+            <span class="badge">rich content</span>
+          </div>
+          <div class="card-body">
+            <div class="topic">
+              <h3>🎵 Audio & Video tags</h3>
+              <div class="desc">
+                <code>&lt;audio&gt;</code> and <code>&lt;video&gt;</code> with
+                controls, source fallback.
+              </div>
+              <div class="code-block">
+                <code
+                  >&lt;audio controls&gt;<br />
+                  &lt;source src="audio.mp3" type="audio/mpeg"&gt;<br />
+                  Your browser does not support audio.<br />&lt;/audio&gt;<br /><br />
+                  &lt;video width="200" controls poster="preview.jpg"&gt;<br />
+                  &lt;source src="movie.mp4" type="video/mp4"&gt;<br />&lt;/video&gt;</code
+                >
+              </div>
+              <div class="demo-out">
+                <audio controls style="width: 100%; max-width: 250px">
+                  <source
+                    src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+                    type="audio/mpeg"
+                  />
+                  Your browser does not support audio.
+                </audio>
+                <video
+                  width="180"
+                  controls
+                  style="margin-top: 8px; border-radius: 12px"
+                >
+                  <source
+                    src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+                <p style="font-size: 0.7rem">
+                  🎬 sample video from MDN (flower)
+                </p>
+              </div>
+            </div>
+            <div class="topic">
+              <h3>🖼️ Canvas & SVG (dynamic graphics)</h3>
+              <div class="desc">
+                <code>&lt;canvas&gt;</code> for scriptable bitmap drawing,
+                <code>&lt;svg&gt;</code> for vector graphics.
+              </div>
+              <div class="code-block">
+                <code
+                  >&lt;canvas id="myCanvas" width="150" height="70"
+                  style="border:1px solid #aaa;"&gt;&lt;/canvas&gt;<br />
+                  &lt;svg width="100" height="70"&gt;&lt;circle cx="40" cy="35"
+                  r="25" fill="#ffb347"/&gt;&lt;/svg&gt;</code
+                >
+              </div>
+              <div class="demo-out">
+                <canvas
+                  id="demoCanvas"
+                  width="150"
+                  height="70"
+                  style="
+                    border: 1px solid #ccc;
+                    background: #fff;
+                    border-radius: 8px;
+                  "
+                ></canvas>
+                <svg width="100" height="70" style="margin-left: 12px">
+                  <circle cx="40" cy="35" r="25" fill="#ffb347" />
+                </svg>
+                <script>
+                  const canvas = document.getElementById('demoCanvas')
+                  if (canvas) {
+                    const ctx = canvas.getContext('2d')
+                    ctx.fillStyle = '#2c5a6e'
+                    ctx.fillRect(10, 10, 60, 35)
+                    ctx.fillStyle = '#ffb347'
+                    ctx.beginPath()
+                    ctx.arc(100, 35, 18, 0, Math.PI * 2)
+                    ctx.fill()
+                  }
+                </script>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 6: ADVANCED / MODERN HTML FEATURES -->
+        <div class="card">
+          <div class="card-header">
+            <h2>⚡ Level 6: Advanced & HTML5 APIs</h2>
+            <span class="badge">cutting-edge</span>
+          </div>
+          <div class="card-body">
+            <div class="topic">
+              <h3>📦 Details & Summary (collapsible)</h3>
+              <div class="code-block">
+                <code
+                  >&lt;details&gt;<br />
+                  &lt;summary&gt;Click to expand&lt;/summary&gt;<br />
+                  Hidden content revealed!<br />&lt;/details&gt;</code
+                >
+              </div>
+              <div class="demo-out">
+                <details>
+                  <summary>✨ Advanced tip: Progressive disclosure</summary>
+                  <p>
+                    Using details/summary improves UX. You can put any HTML
+                    inside.
+                  </p>
+                </details>
+              </div>
+            </div>
+            <div class="topic">
+              <h3>🗂️ data-* attributes & output</h3>
+              <div class="desc">
+                Custom data attributes store extra info.
+                <code>&lt;output&gt;</code> for calculation results.
+              </div>
+              <div class="code-block">
+                <code
+                  >&lt;div data-user-id="12345" id="user"&gt;John
+                  Doe&lt;/div&gt;<br />
+                  &lt;form oninput="result.value = parseInt(a.value) +
+                  parseInt(b.value)"&gt;<br />
+                  &lt;input type="range" name="a" value="50"&gt; + &lt;input
+                  type="number" name="b" value="10"&gt;<br />
+                  = &lt;output name="result"&gt;60&lt;/output&gt;<br />
+                  &lt;/form&gt;</code
+                >
+              </div>
+              <div class="demo-out">
+                <div data-user-id="12345" style="background: #efe">
+                  🔹 Custom data demo (John Doe)
+                </div>
+                <form
+                  oninput="demoResult.value = (parseInt(demoA.value)||0) + (parseInt(demoB.value)||0)"
+                >
+                  <input type="range" name="demoA" value="30" id="demoA" /> +
+                  <input type="number" value="20" name="demoB" id="demoB" /> =
+                  <output name="demoResult" for="demoA demoB">50</output>
+                </form>
+              </div>
+            </div>
+
+            <div class="topic">
+              <h3>📱 HTML Drag & Drop, Content Editable</h3>
+              <div class="desc">
+                <code>draggable="true"</code> &
+                <code>contenteditable</code> enable rich editing.
+              </div>
+              <div class="code-block">
+                <code
+                  >&lt;div draggable="true"
+                  ondragstart="event.dataTransfer.setData('text/plain','Drag
+                  me')"&gt;Drag this&lt;/div&gt;<br />
+                  &lt;div contenteditable="true" style="border:1px solid
+                  #ccc;"&gt;Editable region&lt;/div&gt;</code
+                >
+              </div>
+              <div class="demo-out">
+                <div
+                  draggable="true"
+                  style="
+                    background: #fee5c2;
+                    padding: 6px;
+                    width: fit-content;
+                    border-radius: 20px;
+                  "
+                >
+                  📦 Drag this element
+                </div>
+                <div
+                  contenteditable="true"
+                  style="
+                    border: 1px dashed #ffb347;
+                    padding: 8px;
+                    margin-top: 10px;
+                    border-radius: 8px;
+                  "
+                >
+                  🍃 Double-click or click to edit this text directly!
+                </div>
+              </div>
+            </div>
+            <div class="topic">
+              <h3>🌐 iFrame (embed external content)</h3>
+              <div class="desc">
+                <code
+                  >&lt;iframe src="url"
+                  title="description"&gt;&lt;/iframe&gt;</code
+                >
+                for maps, videos, or sandboxed content.
+              </div>
+              <div class="code-block">
+                <code
+                  >&lt;iframe width="280" height="160"
+                  src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0"
+                  title="demo video"&gt;&lt;/iframe&gt;</code
+                >
+              </div>
+              <div class="demo-out">
+                <iframe
+                  width="260"
+                  height="145"
+                  src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0"
+                  title="YouTube demo"
+                  style="border-radius: 12px"
+                ></iframe>
+                <p style="font-size: 0.7rem">
+                  🎵 (example embed — no audio autoplay)
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- quick reference extra: special tags -->
+        <div class="card">
+          <div class="card-header">
+            <h2>🧩 Bonus: Special text-level & utilities</h2>
+            <span class="badge">extra</span>
+          </div>
+          <div class="card-body">
+            <div class="topic">
+              <h3>⏺️ Mark, Time, Progress, Meter</h3>
+              <div class="code-block">
+                <code
+                  >&lt;mark&gt;highlighted&lt;/mark&gt; &lt;time
+                  datetime="2025-05-02"&gt;May 2&lt;/time&gt;<br />
+                  &lt;progress value="70" max="100"&gt;&lt;/progress&gt;<br />
+                  &lt;meter value="0.6"&gt;60%&lt;/meter&gt;</code
+                >
+              </div>
+              <div class="demo-out">
+                <p>
+                  This is <mark>really important</mark> info. Published
+                  <time datetime="2025-05-02">today</time>.
+                </p>
+                Download progress: <progress value="70" max="100"></progress
+                ><br />
+                Disk usage: <meter value="0.6">60%</meter>
+              </div>
+            </div>
+            <div class="topic">
+              <h3>🧵 Template & Slot (Web Components basics)</h3>
+              <div class="desc">
+                <code>&lt;template&gt;</code> defines reusable HTML fragments,
+                not rendered until cloned with JavaScript.
+              </div>
+              <div class="code-block">
+                <code
+                  >&lt;template id="card-tmpl"&gt;&lt;div
+                  class="card"&gt;Content&lt;/div&gt;&lt;/template&gt;</code
+                >
+              </div>
+              <div class="demo-out">
+                <template id="demo-temp"
+                  ><span style="background: #ffe5b4"
+                    >✨ cloned from template ✨</span
+                  ></template
+                >
+                <button
+                  id="cloneBtn"
+                  style="
+                    background: #0b2b40;
+                    color: white;
+                    border: none;
+                    border-radius: 20px;
+                    padding: 5px 14px;
+                  "
+                >
+                  Clone template element
+                </button>
+                <div id="templateContainer" style="margin-top: 10px"></div>
+                <script>
+                  const cloneBtn = document.getElementById('cloneBtn')
+                  if (cloneBtn) {
+                    cloneBtn.addEventListener('click', () => {
+                      const tmpl = document.getElementById('demo-temp')
+                      const clone = tmpl.content.cloneNode(true)
+                      document
+                        .getElementById('templateContainer')
+                        .appendChild(clone)
+                    })
+                  }
+                </script>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer>
+        ⚡ HTML from basics to advanced — each example is interactive. Use
+        devtools to inspect semantic tags, form controls, canvas, drag & drop,
+        and modern APIs.
+      </footer>
+    </div>
+  </body>
+</html>

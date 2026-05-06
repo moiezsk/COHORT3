@@ -1,0 +1,1796 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML Notes — Basics to Advanced</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=JetBrains+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0e0e12;
+        --surface: #16161d;
+        --surface2: #1e1e28;
+        --border: #2a2a38;
+        --accent: #7c6af7;
+        --accent2: #3ecfb2;
+        --accent3: #f79c6a;
+        --accent4: #f76a8a;
+        --text: #e8e6f0;
+        --muted: #888098;
+        --code-bg: #0a0a10;
+        --tag-color: #7c6af7;
+        --attr-color: #3ecfb2;
+        --val-color: #f79c6a;
+        --comment-color: #555070;
+        --string-color: #a8d8a0;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'DM Sans', sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.75;
+        font-size: 15px;
+      }
+
+      /* SIDEBAR */
+      .sidebar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 250px;
+        height: 100vh;
+        background: var(--surface);
+        border-right: 1px solid var(--border);
+        overflow-y: auto;
+        z-index: 100;
+        padding: 24px 0;
+      }
+
+      .sidebar-logo {
+        padding: 0 20px 20px;
+        border-bottom: 1px solid var(--border);
+        margin-bottom: 16px;
+      }
+
+      .sidebar-logo h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 22px;
+        background: linear-gradient(135deg, var(--accent), var(--accent2));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .sidebar-logo p {
+        font-size: 11px;
+        color: var(--muted);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-top: 2px;
+      }
+
+      .nav-section {
+        padding: 6px 0;
+        margin-bottom: 4px;
+      }
+
+      .nav-section-title {
+        font-size: 10px;
+        color: var(--muted);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 4px 20px 6px;
+        font-weight: 500;
+      }
+
+      .nav-section a {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 20px;
+        color: #aaa8c0;
+        text-decoration: none;
+        font-size: 13px;
+        transition: all 0.15s;
+        border-left: 2px solid transparent;
+      }
+
+      .nav-section a:hover {
+        color: var(--text);
+        background: rgba(124, 106, 247, 0.08);
+        border-left-color: var(--accent);
+      }
+
+      .nav-section a .dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--border);
+        flex-shrink: 0;
+        transition: background 0.15s;
+      }
+
+      .nav-section a:hover .dot {
+        background: var(--accent);
+      }
+
+      /* MAIN CONTENT */
+      .main {
+        margin-left: 250px;
+        min-height: 100vh;
+      }
+
+      .hero {
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        padding: 60px 60px 50px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: '';
+        position: absolute;
+        top: -80px;
+        right: -80px;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(
+          circle,
+          rgba(124, 106, 247, 0.12) 0%,
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+
+      .hero::after {
+        content: '</html>';
+        position: absolute;
+        bottom: 20px;
+        right: 60px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 80px;
+        color: rgba(124, 106, 247, 0.06);
+        pointer-events: none;
+        letter-spacing: -2px;
+      }
+
+      .hero h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 46px;
+        line-height: 1.1;
+        margin-bottom: 12px;
+      }
+
+      .hero h1 span {
+        background: linear-gradient(
+          135deg,
+          var(--accent) 0%,
+          var(--accent2) 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .hero p {
+        font-size: 16px;
+        color: var(--muted);
+        max-width: 560px;
+      }
+
+      .badges {
+        display: flex;
+        gap: 8px;
+        margin-top: 20px;
+        flex-wrap: wrap;
+      }
+
+      .badge {
+        font-size: 11px;
+        font-weight: 500;
+        padding: 4px 12px;
+        border-radius: 20px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .badge-purple {
+        background: rgba(124, 106, 247, 0.18);
+        color: #a096f8;
+        border: 1px solid rgba(124, 106, 247, 0.3);
+      }
+      .badge-teal {
+        background: rgba(62, 207, 178, 0.14);
+        color: #4edbc4;
+        border: 1px solid rgba(62, 207, 178, 0.25);
+      }
+      .badge-orange {
+        background: rgba(247, 156, 106, 0.14);
+        color: #f9b07e;
+        border: 1px solid rgba(247, 156, 106, 0.25);
+      }
+
+      /* SECTIONS */
+      .content {
+        padding: 0 60px 80px;
+      }
+
+      .section {
+        padding-top: 60px;
+        margin-bottom: 0;
+      }
+
+      .section-header {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 28px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .section-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        flex-shrink: 0;
+      }
+
+      .icon-purple {
+        background: rgba(124, 106, 247, 0.18);
+      }
+      .icon-teal {
+        background: rgba(62, 207, 178, 0.14);
+      }
+      .icon-orange {
+        background: rgba(247, 156, 106, 0.14);
+      }
+      .icon-pink {
+        background: rgba(247, 106, 138, 0.14);
+      }
+
+      .section-header h2 {
+        font-family: 'Playfair Display', serif;
+        font-size: 26px;
+        font-weight: 600;
+      }
+
+      .section-num {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 11px;
+        color: var(--accent);
+        background: rgba(124, 106, 247, 0.12);
+        padding: 2px 8px;
+        border-radius: 4px;
+        margin-left: auto;
+        letter-spacing: 0.05em;
+      }
+
+      /* CARDS */
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 20px 24px;
+        margin-bottom: 16px;
+      }
+
+      .card-title {
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--accent2);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .card-title::before {
+        content: '';
+        width: 3px;
+        height: 14px;
+        background: var(--accent2);
+        border-radius: 2px;
+        display: inline-block;
+      }
+
+      .card p {
+        color: #c0bdd4;
+        font-size: 14px;
+        line-height: 1.7;
+      }
+
+      /* TAGS GRID */
+      .tags-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+
+      .tag-card {
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 14px 16px;
+        transition: border-color 0.2s;
+      }
+
+      .tag-card:hover {
+        border-color: rgba(124, 106, 247, 0.4);
+      }
+
+      .tag-name {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 13px;
+        color: var(--tag-color);
+        font-weight: 500;
+        margin-bottom: 4px;
+      }
+
+      .tag-desc {
+        font-size: 12px;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+
+      /* CODE BLOCKS */
+      .code-block {
+        background: var(--code-bg);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        overflow: hidden;
+        margin: 16px 0;
+      }
+
+      .code-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 16px;
+        background: rgba(255, 255, 255, 0.02);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .code-label {
+        font-size: 11px;
+        color: var(--muted);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        font-family: 'JetBrains Mono', monospace;
+      }
+
+      .code-dots {
+        display: flex;
+        gap: 5px;
+      }
+
+      .code-dots span {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+      }
+
+      .code-dots .d1 {
+        background: #ff5f57;
+      }
+      .code-dots .d2 {
+        background: #febc2e;
+      }
+      .code-dots .d3 {
+        background: #28c840;
+      }
+
+      pre {
+        padding: 18px 20px;
+        overflow-x: auto;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 13px;
+        line-height: 1.7;
+      }
+
+      /* Syntax highlighting */
+      .ht {
+        color: var(--tag-color);
+      } /* html tags */
+      .ha {
+        color: var(--attr-color);
+      } /* attributes */
+      .hv {
+        color: var(--val-color);
+      } /* values */
+      .hc {
+        color: var(--comment-color);
+      } /* comments */
+      .hs {
+        color: var(--string-color);
+      } /* strings/content */
+      .hk {
+        color: #c792ea;
+      } /* keywords */
+      .hm {
+        color: #82aaff;
+      } /* numbers/meta */
+      .plain {
+        color: #d4d0e8;
+      }
+
+      /* INLINE CODE */
+      code {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 12px;
+        background: rgba(124, 106, 247, 0.12);
+        color: #a096f8;
+        padding: 2px 7px;
+        border-radius: 4px;
+      }
+
+      /* INFO BOXES */
+      .info-box {
+        border-radius: 10px;
+        padding: 14px 18px;
+        margin: 14px 0;
+        font-size: 13.5px;
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+      }
+
+      .info-box .icon {
+        font-size: 15px;
+        margin-top: 2px;
+        flex-shrink: 0;
+      }
+
+      .tip {
+        background: rgba(62, 207, 178, 0.08);
+        border: 1px solid rgba(62, 207, 178, 0.2);
+      }
+      .tip .icon {
+        color: var(--accent2);
+      }
+      .tip p {
+        color: #8cf5e0;
+      }
+
+      .warn {
+        background: rgba(247, 156, 106, 0.08);
+        border: 1px solid rgba(247, 156, 106, 0.2);
+      }
+      .warn .icon {
+        color: var(--accent3);
+      }
+      .warn p {
+        color: #f9c49a;
+      }
+
+      .note {
+        background: rgba(124, 106, 247, 0.08);
+        border: 1px solid rgba(124, 106, 247, 0.2);
+      }
+      .note .icon {
+        color: var(--accent);
+      }
+      .note p {
+        color: #b0a8f8;
+      }
+
+      /* TABLE */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+        margin: 16px 0;
+      }
+
+      th {
+        background: var(--surface2);
+        color: var(--accent2);
+        font-weight: 500;
+        text-align: left;
+        padding: 10px 14px;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        border-bottom: 1px solid var(--border);
+      }
+
+      td {
+        padding: 10px 14px;
+        border-bottom: 1px solid rgba(42, 42, 56, 0.6);
+        color: #c8c5dc;
+        vertical-align: top;
+      }
+
+      tr:hover td {
+        background: rgba(124, 106, 247, 0.04);
+      }
+
+      td:first-child {
+        font-family: 'JetBrains Mono', monospace;
+        color: var(--tag-color);
+        font-size: 12px;
+      }
+
+      /* DIVIDER */
+      .divider {
+        height: 1px;
+        background: var(--border);
+        margin: 48px 0;
+      }
+
+      /* SCROLL */
+      ::-webkit-scrollbar {
+        width: 5px;
+        height: 5px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--border);
+        border-radius: 3px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #3a3a50;
+      }
+
+      @media (max-width: 900px) {
+        .sidebar {
+          display: none;
+        }
+        .main {
+          margin-left: 0;
+        }
+        .hero,
+        .content {
+          padding-left: 24px;
+          padding-right: 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- SIDEBAR -->
+    <nav class="sidebar">
+      <div class="sidebar-logo">
+        <h1>HTML Notes</h1>
+        <p>Basics to Advanced</p>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Fundamentals</div>
+        <a href="#intro"><span class="dot"></span> Introduction</a>
+        <a href="#structure"><span class="dot"></span> Document Structure</a>
+        <a href="#text"><span class="dot"></span> Text Tags</a>
+        <a href="#links"><span class="dot"></span> Links & Anchors</a>
+        <a href="#images"><span class="dot"></span> Images & Media</a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Intermediate</div>
+        <a href="#lists"><span class="dot"></span> Lists</a>
+        <a href="#tables"><span class="dot"></span> Tables</a>
+        <a href="#forms"><span class="dot"></span> Forms & Inputs</a>
+        <a href="#semantic"><span class="dot"></span> Semantic HTML</a>
+        <a href="#meta"><span class="dot"></span> Meta & Head Tags</a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Advanced</div>
+        <a href="#media"><span class="dot"></span> Audio & Video</a>
+        <a href="#canvas"><span class="dot"></span> Canvas & SVG</a>
+        <a href="#apis"><span class="dot"></span> HTML APIs</a>
+        <a href="#accessibility"><span class="dot"></span> Accessibility</a>
+        <a href="#cheatsheet"><span class="dot"></span> Cheat Sheet</a>
+      </div>
+    </nav>
+
+    <!-- MAIN -->
+    <main class="main">
+      <!-- HERO -->
+      <div class="hero">
+        <h1>HTML <span>Complete Notes</span></h1>
+        <p>
+          From document structure to advanced APIs — everything you need to
+          master HyperText Markup Language with real code examples.
+        </p>
+        <div class="badges">
+          <span class="badge badge-purple">HTML5</span>
+          <span class="badge badge-teal">Semantic Web</span>
+          <span class="badge badge-orange">Accessibility</span>
+        </div>
+      </div>
+
+      <div class="content">
+        <!-- =========================================
+         1. INTRODUCTION
+    ========================================= -->
+        <div class="section" id="intro">
+          <div class="section-header">
+            <div class="section-icon icon-purple">🌐</div>
+            <h2>Introduction to HTML</h2>
+            <span class="section-num">01</span>
+          </div>
+
+          <div class="card">
+            <div class="card-title">What is HTML?</div>
+            <p>
+              HTML (HyperText Markup Language) is the standard language for
+              creating web pages. It describes the structure of web content
+              using a system of elements represented by <strong>tags</strong>.
+              Browsers read HTML and render it as visual pages. HTML is NOT a
+              programming language — it's a markup language.
+            </p>
+          </div>
+
+          <div class="info-box tip">
+            <span class="icon">✦</span>
+            <p>
+              <strong>HTML5</strong> is the current version. It introduced
+              semantic tags, multimedia support, canvas, form validation, data
+              attributes, and much more.
+            </p>
+          </div>
+
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-label">Basic HTML Page</span>
+              <div class="code-dots">
+                <span class="d1"></span><span class="d2"></span
+                ><span class="d3"></span>
+              </div>
+            </div>
+            <pre><span class="hc">&lt;!-- This is an HTML comment --&gt;</span>
+<span class="hm">&lt;!DOCTYPE html&gt;</span>           <span class="hc">&lt;!-- Declares HTML5 --&gt;</span>
+<span class="ht">&lt;html</span> <span class="ha">lang</span>=<span class="hv">"en"</span><span class="ht">&gt;</span>
+  <span class="ht">&lt;head&gt;</span>
+    <span class="ht">&lt;meta</span> <span class="ha">charset</span>=<span class="hv">"UTF-8"</span><span class="ht">&gt;</span>
+    <span class="ht">&lt;meta</span> <span class="ha">name</span>=<span class="hv">"viewport"</span> <span class="ha">content</span>=<span class="hv">"width=device-width, initial-scale=1.0"</span><span class="ht">&gt;</span>
+    <span class="ht">&lt;title&gt;</span><span class="hs">My First Web Page</span><span class="ht">&lt;/title&gt;</span>
+  <span class="ht">&lt;/head&gt;</span>
+  <span class="ht">&lt;body&gt;</span>
+    <span class="ht">&lt;h1&gt;</span><span class="hs">Hello, World!</span><span class="ht">&lt;/h1&gt;</span>
+    <span class="ht">&lt;p&gt;</span><span class="hs">Welcome to my first web page.</span><span class="ht">&lt;/p&gt;</span>
+  <span class="ht">&lt;/body&gt;</span>
+<span class="ht">&lt;/html&gt;</span></pre>
+          </div>
+
+          <div class="tags-grid">
+            <div class="tag-card">
+              <div class="tag-name">&lt;!DOCTYPE html&gt;</div>
+              <div class="tag-desc">
+                Document type declaration. Tells browser to use HTML5 mode.
+                Always the first line.
+              </div>
+            </div>
+            <div class="tag-card">
+              <div class="tag-name">&lt;html&gt;</div>
+              <div class="tag-desc">
+                Root element. Wraps entire page. Use <code>lang</code> attribute
+                for language.
+              </div>
+            </div>
+            <div class="tag-card">
+              <div class="tag-name">&lt;head&gt;</div>
+              <div class="tag-desc">
+                Contains metadata — not visible on page. Holds title, styles,
+                scripts, meta tags.
+              </div>
+            </div>
+            <div class="tag-card">
+              <div class="tag-name">&lt;body&gt;</div>
+              <div class="tag-desc">
+                All visible content goes here. Everything the user sees on the
+                page.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- =========================================
+         2. DOCUMENT STRUCTURE
+    ========================================= -->
+        <div class="section" id="structure">
+          <div class="section-header">
+            <div class="section-icon icon-teal">🏗️</div>
+            <h2>Document Structure</h2>
+            <span class="section-num">02</span>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Block vs Inline Elements</div>
+            <p>
+              <strong>Block elements</strong> start on a new line and take full
+              width: <code>&lt;div&gt;</code>, <code>&lt;p&gt;</code>,
+              <code>&lt;h1&gt;–&lt;h6&gt;</code>, <code>&lt;section&gt;</code>,
+              etc.<br />
+              <strong>Inline elements</strong> flow within text:
+              <code>&lt;span&gt;</code>, <code>&lt;a&gt;</code>,
+              <code>&lt;strong&gt;</code>, <code>&lt;em&gt;</code>,
+              <code>&lt;img&gt;</code>, etc.
+            </p>
+          </div>
+
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-label">Headings, Paragraphs & Containers</span>
+              <div class="code-dots">
+                <span class="d1"></span><span class="d2"></span
+                ><span class="d3"></span>
+              </div>
+            </div>
+            <pre><span class="hc">&lt;!-- Headings: h1 is most important, h6 least --&gt;</span>
+<span class="ht">&lt;h1&gt;</span><span class="hs">Main Heading (page title)</span><span class="ht">&lt;/h1&gt;</span>
+<span class="ht">&lt;h2&gt;</span><span class="hs">Sub Heading</span><span class="ht">&lt;/h2&gt;</span>
+<span class="ht">&lt;h3&gt;</span><span class="hs">Section Heading</span><span class="ht">&lt;/h3&gt;</span>
+<span class="ht">&lt;h4&gt;</span><span class="hs">Sub-section</span><span class="ht">&lt;/h4&gt;</span>
+<span class="ht">&lt;h5&gt;</span><span class="hs">Small heading</span><span class="ht">&lt;/h5&gt;</span>
+<span class="ht">&lt;h6&gt;</span><span class="hs">Smallest heading</span><span class="ht">&lt;/h6&gt;</span>
+
+<span class="hc">&lt;!-- Paragraphs --&gt;</span>
+<span class="ht">&lt;p&gt;</span><span class="hs">This is a paragraph of text.</span><span class="ht">&lt;/p&gt;</span>
+
+<span class="hc">&lt;!-- Line break (self-closing) --&gt;</span>
+<span class="ht">&lt;p&gt;</span><span class="hs">Line one</span><span class="ht">&lt;br&gt;</span><span class="hs">Line two</span><span class="ht">&lt;/p&gt;</span>
+
+<span class="hc">&lt;!-- Horizontal rule --&gt;</span>
+<span class="ht">&lt;hr&gt;</span>
+
+<span class="hc">&lt;!-- Generic block container --&gt;</span>
+<span class="ht">&lt;div</span> <span class="ha">class</span>=<span class="hv">"container"</span><span class="ht">&gt;</span>
+  <span class="ht">&lt;p&gt;</span><span class="hs">Block-level content</span><span class="ht">&lt;/p&gt;</span>
+<span class="ht">&lt;/div&gt;</span>
+
+<span class="hc">&lt;!-- Generic inline container --&gt;</span>
+<span class="ht">&lt;p&gt;</span><span class="hs">Text with </span><span class="ht">&lt;span</span> <span class="ha">style</span>=<span class="hv">"color:red"</span><span class="ht">&gt;</span><span class="hs">red part</span><span class="ht">&lt;/span&gt;</span><span class="hs"> inline.</span><span class="ht">&lt;/p&gt;</span></pre>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- =========================================
+         3. TEXT FORMATTING
+    ========================================= -->
+        <div class="section" id="text">
+          <div class="section-header">
+            <div class="section-icon icon-orange">✏️</div>
+            <h2>Text Formatting Tags</h2>
+            <span class="section-num">03</span>
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Tag</th>
+                <th>Purpose</th>
+                <th>Example Output</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>&lt;strong&gt;</td>
+                <td>Important/bold text (semantic)</td>
+                <td><strong>Bold text</strong></td>
+              </tr>
+              <tr>
+                <td>&lt;em&gt;</td>
+                <td>Emphasis/italic text (semantic)</td>
+                <td><em>Italic text</em></td>
+              </tr>
+              <tr>
+                <td>&lt;b&gt;</td>
+                <td>Bold (presentational only)</td>
+                <td><b>Bold</b></td>
+              </tr>
+              <tr>
+                <td>&lt;i&gt;</td>
+                <td>Italic (presentational only)</td>
+                <td><i>Italic</i></td>
+              </tr>
+              <tr>
+                <td>&lt;u&gt;</td>
+                <td>Underline</td>
+                <td><u>Underlined</u></td>
+              </tr>
+              <tr>
+                <td>&lt;s&gt;</td>
+                <td>Strikethrough</td>
+                <td><s>Strikethrough</s></td>
+              </tr>
+              <tr>
+                <td>&lt;mark&gt;</td>
+                <td>Highlighted text</td>
+                <td><mark>Highlighted</mark></td>
+              </tr>
+              <tr>
+                <td>&lt;small&gt;</td>
+                <td>Smaller text (fine print)</td>
+                <td><small>Small text</small></td>
+              </tr>
+              <tr>
+                <td>&lt;sup&gt;</td>
+                <td>Superscript</td>
+                <td>E=mc<sup>2</sup></td>
+              </tr>
+              <tr>
+                <td>&lt;sub&gt;</td>
+                <td>Subscript</td>
+                <td>H<sub>2</sub>O</td>
+              </tr>
+              <tr>
+                <td>&lt;code&gt;</td>
+                <td>Inline code</td>
+                <td><code>console.log()</code></td>
+              </tr>
+              <tr>
+                <td>&lt;pre&gt;</td>
+                <td>Preformatted text (preserves spaces)</td>
+                <td>Monospace block</td>
+              </tr>
+              <tr>
+                <td>&lt;blockquote&gt;</td>
+                <td>Block quotation from external source</td>
+                <td>Indented quote</td>
+              </tr>
+              <tr>
+                <td>&lt;q&gt;</td>
+                <td>Inline quotation (adds quotes)</td>
+                <td>"Inline quote"</td>
+              </tr>
+              <tr>
+                <td>&lt;abbr&gt;</td>
+                <td>Abbreviation with tooltip</td>
+                <td>HTML (tooltip on hover)</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-label">Text Formatting Example</span>
+              <div class="code-dots">
+                <span class="d1"></span><span class="d2"></span
+                ><span class="d3"></span>
+              </div>
+            </div>
+            <pre><span class="ht">&lt;p&gt;</span><span class="hs">
+  <span class="ht">&lt;strong&gt;</span>Important:<span class="ht">&lt;/strong&gt;</span> Always write <span class="ht">&lt;em&gt;</span>semantic<span class="ht">&lt;/em&gt;</span> HTML.
+  Einstein discovered E=mc<span class="ht">&lt;sup&gt;</span>2<span class="ht">&lt;/sup&gt;</span>.
+  Water is H<span class="ht">&lt;sub&gt;</span>2<span class="ht">&lt;/sub&gt;</span>O.
+  Use <span class="ht">&lt;mark&gt;</span>highlighted<span class="ht">&lt;/mark&gt;</span> for emphasis.
+  <span class="ht">&lt;del&gt;</span>Old price: ₹999<span class="ht">&lt;/del&gt;</span> <span class="ht">&lt;ins&gt;</span>New: ₹599<span class="ht">&lt;/ins&gt;</span>
+</span><span class="ht">&lt;/p&gt;</span>
+
+<span class="ht">&lt;blockquote</span> <span class="ha">cite</span>=<span class="hv">"https://example.com"</span><span class="ht">&gt;</span>
+  <span class="hs">The best way to predict the future is to invent it.</span>
+<span class="ht">&lt;/blockquote&gt;</span>
+
+<span class="ht">&lt;abbr</span> <span class="ha">title</span>=<span class="hv">"HyperText Markup Language"</span><span class="ht">&gt;</span><span class="hs">HTML</span><span class="ht">&lt;/abbr&gt;</span>
+
+<span class="ht">&lt;pre&gt;</span>
+  <span class="hs">function hello() {</span>
+  <span class="hs">  console.log("Hello!");</span>
+  <span class="hs">}</span>
+<span class="ht">&lt;/pre&gt;</span></pre>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- =========================================
+         4. LINKS
+    ========================================= -->
+        <div class="section" id="links">
+          <div class="section-header">
+            <div class="section-icon icon-pink">🔗</div>
+            <h2>Links & Anchors</h2>
+            <span class="section-num">04</span>
+          </div>
+
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-label">Anchor Tag — All Types</span>
+              <div class="code-dots">
+                <span class="d1"></span><span class="d2"></span
+                ><span class="d3"></span>
+              </div>
+            </div>
+            <pre><span class="hc">&lt;!-- External link (opens in new tab) --&gt;</span>
+<span class="ht">&lt;a</span> <span class="ha">href</span>=<span class="hv">"https://google.com"</span> <span class="ha">target</span>=<span class="hv">"_blank"</span> <span class="ha">rel</span>=<span class="hv">"noopener noreferrer"</span><span class="ht">&gt;</span>
+  <span class="hs">Visit Google</span>
+<span class="ht">&lt;/a&gt;</span>
+
+<span class="hc">&lt;!-- Internal link to another page --&gt;</span>
+<span class="ht">&lt;a</span> <span class="ha">href</span>=<span class="hv">"about.html"</span><span class="ht">&gt;</span><span class="hs">About Us</span><span class="ht">&lt;/a&gt;</span>
+
+<span class="hc">&lt;!-- Jump to section on same page (anchor) --&gt;</span>
+<span class="ht">&lt;a</span> <span class="ha">href</span>=<span class="hv">"#contact"</span><span class="ht">&gt;</span><span class="hs">Go to Contact section</span><span class="ht">&lt;/a&gt;</span>
+<span class="ht">&lt;section</span> <span class="ha">id</span>=<span class="hv">"contact"</span><span class="ht">&gt;</span><span class="hs">...</span><span class="ht">&lt;/section&gt;</span>
+
+<span class="hc">&lt;!-- Email link --&gt;</span>
+<span class="ht">&lt;a</span> <span class="ha">href</span>=<span class="hv">"mailto:hello@example.com"</span><span class="ht">&gt;</span><span class="hs">Email us</span><span class="ht">&lt;/a&gt;</span>
+
+<span class="hc">&lt;!-- Phone link --&gt;</span>
+<span class="ht">&lt;a</span> <span class="ha">href</span>=<span class="hv">"tel:+919876543210"</span><span class="ht">&gt;</span><span class="hs">Call us</span><span class="ht">&lt;/a&gt;</span>
+
+<span class="hc">&lt;!-- Download link --&gt;</span>
+<span class="ht">&lt;a</span> <span class="ha">href</span>=<span class="hv">"file.pdf"</span> <span class="ha">download</span>=<span class="hv">"my-file.pdf"</span><span class="ht">&gt;</span><span class="hs">Download PDF</span><span class="ht">&lt;/a&gt;</span>
+
+<span class="hc">&lt;!-- Image as link --&gt;</span>
+<span class="ht">&lt;a</span> <span class="ha">href</span>=<span class="hv">"https://example.com"</span><span class="ht">&gt;</span>
+  <span class="ht">&lt;img</span> <span class="ha">src</span>=<span class="hv">"logo.png"</span> <span class="ha">alt</span>=<span class="hv">"Logo"</span><span class="ht">&gt;</span>
+<span class="ht">&lt;/a&gt;</span></pre>
+          </div>
+
+          <div class="info-box warn">
+            <span class="icon">⚠</span>
+            <p>
+              Always add <code>rel="noopener noreferrer"</code> when using
+              <code>target="_blank"</code> to prevent security vulnerabilities
+              (reverse tabnapping).
+            </p>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- =========================================
+         5. IMAGES
+    ========================================= -->
+        <div class="section" id="images">
+          <div class="section-header">
+            <div class="section-icon icon-purple">🖼️</div>
+            <h2>Images & Media</h2>
+            <span class="section-num">05</span>
+          </div>
+
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-label">Image Tags & Attributes</span>
+              <div class="code-dots">
+                <span class="d1"></span><span class="d2"></span
+                ><span class="d3"></span>
+              </div>
+            </div>
+            <pre><span class="hc">&lt;!-- Basic image (alt is REQUIRED for accessibility) --&gt;</span>
+<span class="ht">&lt;img</span> <span class="ha">src</span>=<span class="hv">"photo.jpg"</span> <span class="ha">alt</span>=<span class="hv">"A beautiful sunset"</span><span class="ht">&gt;</span>
+
+<span class="hc">&lt;!-- With dimensions --&gt;</span>
+<span class="ht">&lt;img</span> <span class="ha">src</span>=<span class="hv">"photo.jpg"</span> <span class="ha">alt</span>=<span class="hv">"Sunset"</span> <span class="ha">width</span>=<span class="hv">"800"</span> <span class="ha">height</span>=<span class="hv">"600"</span><span class="ht">&gt;</span>
+
+<span class="hc">&lt;!-- Lazy loading (performance!) --&gt;</span>
+<span class="ht">&lt;img</span> <span class="ha">src</span>=<span class="hv">"photo.jpg"</span> <span class="ha">alt</span>=<span class="hv">"Sunset"</span> <span class="ha">loading</span>=<span class="hv">"lazy"</span><span class="ht">&gt;</span>
+
+<span class="hc">&lt;!-- Figure with caption --&gt;</span>
+<span class="ht">&lt;figure&gt;</span>
+  <span class="ht">&lt;img</span> <span class="ha">src</span>=<span class="hv">"photo.jpg"</span> <span class="ha">alt</span>=<span class="hv">"Mumbai skyline"</span><span class="ht">&gt;</span>
+  <span class="ht">&lt;figcaption&gt;</span><span class="hs">The beautiful Mumbai skyline at night.</span><span class="ht">&lt;/figcaption&gt;</span>
+<span class="ht">&lt;/figure&gt;</span>
+
+<span class="hc">&lt;!-- Responsive images with srcset --&gt;</span>
+<span class="ht">&lt;img</span>
+  <span class="ha">src</span>=<span class="hv">"photo-800.jpg"</span>
+  <span class="ha">srcset</span>=<span class="hv">"photo-400.jpg 400w, photo-800.jpg 800w, photo-1600.jpg 1600w"</span>
+  <span class="ha">sizes</span>=<span class="hv">"(max-width: 600px) 400px, (max-width: 1200px) 800px, 1600px"</span>
+  <span class="ha">alt</span>=<span class="hv">"Responsive image"</span>
+<span class="ht">&gt;</span>
+
+<span class="hc">&lt;!-- Picture element (art direction) --&gt;</span>
+<span class="ht">&lt;picture&gt;</span>
+  <span class="ht">&lt;source</span> <span class="ha">media</span>=<span class="hv">"(max-width: 600px)"</span> <span class="ha">srcset</span>=<span class="hv">"mobile.jpg"</span><span class="ht">&gt;</span>
+  <span class="ht">&lt;source</span> <span class="ha">media</span>=<span class="hv">"(max-width: 1200px)"</span> <span class="ha">srcset</span>=<span class="hv">"tablet.jpg"</span><span class="ht">&gt;</span>
+  <span class="ht">&lt;img</span> <span class="ha">src</span>=<span class="hv">"desktop.jpg"</span> <span class="ha">alt</span>=<span class="hv">"Responsive art-directed image"</span><span class="ht">&gt;</span>
+<span class="ht">&lt;/picture&gt;</span></pre>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- =========================================
+         6. LISTS
+    ========================================= -->
+        <div class="section" id="lists">
+          <div class="section-header">
+            <div class="section-icon icon-teal">📋</div>
+            <h2>Lists</h2>
+            <span class="section-num">06</span>
+          </div>
+
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-label"
+                >Unordered, Ordered & Description Lists</span
+              >
+              <div class="code-dots">
+                <span class="d1"></span><span class="d2"></span
+                ><span class="d3"></span>
+              </div>
+            </div>
+            <pre><span class="hc">&lt;!-- Unordered list (bullets) --&gt;</span>
+<span class="ht">&lt;ul&gt;</span>
+  <span class="ht">&lt;li&gt;</span><span class="hs">HTML</span><span class="ht">&lt;/li&gt;</span>
+  <span class="ht">&lt;li&gt;</span><span class="hs">CSS</span><span class="ht">&lt;/li&gt;</span>
+  <span class="ht">&lt;li&gt;</span><span class="hs">JavaScript</span><span class="ht">&lt;/li&gt;</span>
+<span class="ht">&lt;/ul&gt;</span>
+
+<span class="hc">&lt;!-- Ordered list (numbers) --&gt;</span>
+<span class="ht">&lt;ol&gt;</span>
+  <span class="ht">&lt;li&gt;</span><span class="hs">First step</span><span class="ht">&lt;/li&gt;</span>
+  <span class="ht">&lt;li&gt;</span><span class="hs">Second step</span><span class="ht">&lt;/li&gt;</span>
+  <span class="ht">&lt;li&gt;</span><span class="hs">Third step</span><span class="ht">&lt;/li&gt;</span>
+<span class="ht">&lt;/ol&gt;</span>
+
+<span class="hc">&lt;!-- Ordered list attributes --&gt;</span>
+<span class="ht">&lt;ol</span> <span class="ha">type</span>=<span class="hv">"A"</span> <span class="ha">start</span>=<span class="hv">"3"</span> <span class="ha">reversed</span><span class="ht">&gt;</span>   <span class="hc">&lt;!-- A,B,C... | start from 3 | count down --&gt;</span>
+  <span class="ht">&lt;li&gt;</span><span class="hs">Item</span><span class="ht">&lt;/li&gt;</span>
+<span class="ht">&lt;/ol&gt;</span>
+
+<span class="hc">&lt;!-- Nested list --&gt;</span>
+<span class="ht">&lt;ul&gt;</span>
+  <span class="ht">&lt;li&gt;</span><span class="hs">Frontend
+    <span class="ht">&lt;ul&gt;</span>
+      <span class="ht">&lt;li&gt;</span>HTML<span class="ht">&lt;/li&gt;</span>
+      <span class="ht">&lt;li&gt;</span>CSS<span class="ht">&lt;/li&gt;</span>
+    <span class="ht">&lt;/ul&gt;</span>
+  </span><span class="ht">&lt;/li&gt;</span>
+<span class="ht">&lt;/ul&gt;</span>
+
+<span class="hc">&lt;!-- Description list (term + definition) --&gt;</span>
+<span class="ht">&lt;dl&gt;</span>
+  <span class="ht">&lt;dt&gt;</span><span class="hs">HTML</span><span class="ht">&lt;/dt&gt;</span>
+  <span class="ht">&lt;dd&gt;</span><span class="hs">HyperText Markup Language — structures web content.</span><span class="ht">&lt;/dd&gt;</span>
+  <span class="ht">&lt;dt&gt;</span><span class="hs">CSS</span><span class="ht">&lt;/dt&gt;</span>
+  <span class="ht">&lt;dd&gt;</span><span class="hs">Cascading Style Sheets — styles web content.</span><span class="ht">&lt;/dd&gt;</span>
+<span class="ht">&lt;/dl&gt;</span></pre>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- =========================================
+         7. TABLES
+    ========================================= -->
+        <div class="section" id="tables">
+          <div class="section-header">
+            <div class="section-icon icon-orange">📊</div>
+            <h2>Tables</h2>
+            <span class="section-num">07</span>
+          </div>
+
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-label">Full Table with Accessibility</span>
+              <div class="code-dots">
+                <span class="d1"></span><span class="d2"></span
+                ><span class="d3"></span>
+              </div>
+            </div>
+            <pre><span class="ht">&lt;table&gt;</span>
+  <span class="ht">&lt;caption&gt;</span><span class="hs">Monthly Sales Report</span><span class="ht">&lt;/caption&gt;</span>  <span class="hc">&lt;!-- table title --&gt;</span>
+  
+  <span class="ht">&lt;thead&gt;</span>                             <span class="hc">&lt;!-- header group --&gt;</span>
+    <span class="ht">&lt;tr&gt;</span>
+      <span class="ht">&lt;th</span> <span class="ha">scope</span>=<span class="hv">"col"</span><span class="ht">&gt;</span><span class="hs">Month</span><span class="ht">&lt;/th&gt;</span>
+      <span class="ht">&lt;th</span> <span class="ha">scope</span>=<span class="hv">"col"</span><span class="ht">&gt;</span><span class="hs">Revenue</span><span class="ht">&lt;/th&gt;</span>
+      <span class="ht">&lt;th</span> <span class="ha">scope</span>=<span class="hv">"col"</span><span class="ht">&gt;</span><span class="hs">Growth</span><span class="ht">&lt;/th&gt;</span>
+    <span class="ht">&lt;/tr&gt;</span>
+  <span class="ht">&lt;/thead&gt;</span>
+  
+  <span class="ht">&lt;tbody&gt;</span>                             <span class="hc">&lt;!-- data body --&gt;</span>
+    <span class="ht">&lt;tr&gt;</span>
+      <span class="ht">&lt;td&gt;</span><span class="hs">January</span><span class="ht">&lt;/td&gt;</span>
+      <span class="ht">&lt;td&gt;</span><span class="hs">₹1,20,000</span><span class="ht">&lt;/td&gt;</span>
+      <span class="ht">&lt;td&gt;</span><span class="hs">+12%</span><span class="ht">&lt;/td&gt;</span>
+    <span class="ht">&lt;/tr&gt;</span>
+    <span class="ht">&lt;tr&gt;</span>
+      <span class="ht">&lt;td</span> <span class="ha">colspan</span>=<span class="hv">"2"</span><span class="ht">&gt;</span><span class="hs">February (merged cell)</span><span class="ht">&lt;/td&gt;</span>  <span class="hc">&lt;!-- colspan --&gt;</span>
+      <span class="ht">&lt;td&gt;</span><span class="hs">+8%</span><span class="ht">&lt;/td&gt;</span>
+    <span class="ht">&lt;/tr&gt;</span>
+  <span class="ht">&lt;/tbody&gt;</span>
+  
+  <span class="ht">&lt;tfoot&gt;</span>                             <span class="hc">&lt;!-- footer group --&gt;</span>
+    <span class="ht">&lt;tr&gt;</span>
+      <span class="ht">&lt;td&gt;</span><span class="hs">Total</span><span class="ht">&lt;/td&gt;</span>
+      <span class="ht">&lt;td&gt;</span><span class="hs">₹2,40,000</span><span class="ht">&lt;/td&gt;</span>
+      <span class="ht">&lt;td&gt;</span><span class="hs">+10%</span><span class="ht">&lt;/td&gt;</span>
+    <span class="ht">&lt;/tr&gt;</span>
+  <span class="ht">&lt;/tfoot&gt;</span>
+<span class="ht">&lt;/table&gt;</span></pre>
+          </div>
+
+          <div class="info-box note">
+            <span class="icon">ℹ</span>
+            <p>
+              Use <code>colspan</code> to span columns and
+              <code>rowspan</code> to span rows. <code>scope="col"</code> or
+              <code>scope="row"</code> on <code>&lt;th&gt;</code> improves
+              screen reader accessibility.
+            </p>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- =========================================
+         8. FORMS
+    ========================================= -->
+        <div class="section" id="forms">
+          <div class="section-header">
+            <div class="section-icon icon-pink">📝</div>
+            <h2>Forms & Inputs</h2>
+            <span class="section-num">08</span>
+          </div>
+
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-label">Complete Form Example</span>
+              <div class="code-dots">
+                <span class="d1"></span><span class="d2"></span
+                ><span class="d3"></span>
+              </div>
+            </div>
+            <pre><span class="ht">&lt;form</span> <span class="ha">action</span>=<span class="hv">"/submit"</span> <span class="ha">method</span>=<span class="hv">"POST"</span> <span class="ha">enctype</span>=<span class="hv">"multipart/form-data"</span><span class="ht">&gt;</span>
+
+  <span class="hc">&lt;!-- Text inputs --&gt;</span>
+  <span class="ht">&lt;label</span> <span class="ha">for</span>=<span class="hv">"name"</span><span class="ht">&gt;</span><span class="hs">Full Name</span><span class="ht">&lt;/label&gt;</span>
+  <span class="ht">&lt;input</span> <span class="ha">type</span>=<span class="hv">"text"</span> <span class="ha">id</span>=<span class="hv">"name"</span> <span class="ha">name</span>=<span class="hv">"name"</span> <span class="ha">placeholder</span>=<span class="hv">"John Doe"</span> <span class="ha">required</span><span class="ht">&gt;</span>
+
+  <span class="ht">&lt;label</span> <span class="ha">for</span>=<span class="hv">"email"</span><span class="ht">&gt;</span><span class="hs">Email</span><span class="ht">&lt;/label&gt;</span>
+  <span class="ht">&lt;input</span> <span class="ha">type</span>=<span class="hv">"email"</span> <span class="ha">id</span>=<span class="hv">"email"</span> <span class="ha">name</span>=<span class="hv">"email"</span> <span class="ha">required</span><span class="ht">&gt;</span>
+
+  <span class="ht">&lt;input</span> <span class="ha">type</span>=<span class="hv">"password"</span> <span class="ha">name</span>=<span class="hv">"pwd"</span> <span class="ha">minlength</span>=<span class="hv">"8"</span><span class="ht">&gt;</span>
+  <span class="ht">&lt;input</span> <span class="ha">type</span>=<span class="hv">"number"</span> <span class="ha">name</span>=<span class="hv">"age"</span> <span class="ha">min</span>=<span class="hv">"1"</span> <span class="ha">max</span>=<span class="hv">"120"</span><span class="ht">&gt;</span>
+  <span class="ht">&lt;input</span> <span class="ha">type</span>=<span class="hv">"tel"</span> <span class="ha">name</span>=<span class="hv">"phone"</span> <span class="ha">pattern</span>=<span class="hv">"[0-9]{10}"</span><span class="ht">&gt;</span>
+  <span class="ht">&lt;input</span> <span class="ha">type</span>=<span class="hv">"url"</span> <span class="ha">name</span>=<span class="hv">"website"</span><span class="ht">&gt;</span>
+  <span class="ht">&lt;input</span> <span class="ha">type</span>=<span class="hv">"date"</span> <span class="ha">name</span>=<span class="hv">"dob"</span><span class="ht">&gt;</span>
+  <span class="ht">&lt;input</span> <span class="ha">type</span>=<span class="hv">"range"</span> <span class="ha">name</span>=<span class="hv">"volume"</span> <span class="ha">min</span>=<span class="hv">"0"</span> <span class="ha">max</span>=<span class="hv">"100"</span><span class="ht">&gt;</span>
+  <span class="ht">&lt;input</span> <span class="ha">type</span>=<span class="hv">"color"</span> <span class="ha">name</span>=<span class="hv">"theme"</span><span class="ht">&gt;</span>
+  <span class="ht">&lt;input</span> <span class="ha">type</span>=<span class="hv">"file"</span> <span class="ha">name</span>=<span class="hv">"avatar"</span> <span class="ha">accept</span>=<span class="hv">"image/*"</span> <span class="ha">multiple</span><span class="ht">&gt;</span>
+  <span class="ht">&lt;input</span> <span class="ha">type</span>=<span class="hv">"hidden"</span> <span class="ha">name</span>=<span class="hv">"token"</span> <span class="ha">value</span>=<span class="hv">"abc123"</span><span class="ht">&gt;</span>
+
+  <span class="hc">&lt;!-- Textarea --&gt;</span>
+  <span class="ht">&lt;textarea</span> <span class="ha">name</span>=<span class="hv">"message"</span> <span class="ha">rows</span>=<span class="hv">"5"</span> <span class="ha">cols</span>=<span class="hv">"40"</span><span class="ht">&gt;&lt;/textarea&gt;</span>
+
+  <span class="hc">&lt;!-- Select dropdown --&gt;</span>
+  <span class="ht">&lt;select</span> <span class="ha">name</span>=<span class="hv">"country"</span><span class="ht">&gt;</span>
+    <span class="ht">&lt;optgroup</span> <span class="ha">label</span>=<span class="hv">"South Asia"</span><span class="ht">&gt;</span>
+      <span class="ht">&lt;option</span> <span class="ha">value</span>=<span class="hv">"in"</span><span class="ht">&gt;</span><span class="hs">India</span><span class="ht">&lt;/option&gt;</span>
+      <span class="ht">&lt;option</span> <span class="ha">value</span>=<span class="hv">"pk"</span> <span class="ha">selected</span><span class="ht">&gt;</span><span class="hs">Pakistan</span><span class="ht">&lt;/option&gt;</span>
+    <span class="ht">&lt;/optgroup&gt;</span>
+  <span class="ht">&lt;/select&gt;</span>
+
+  <span class="hc">&lt;!-- Radio buttons --&gt;</span>
+  <span class="ht">&lt;input</span> <span class="ha">type</span>=<span class="hv">"radio"</span> <span class="ha">name</span>=<span class="hv">"gender"</span> <span class="ha">value</span>=<span class="hv">"male"</span> <span class="ha">id</span>=<span class="hv">"male"</span><span class="ht">&gt;</span>
+  <span class="ht">&lt;label</span> <span class="ha">for</span>=<span class="hv">"male"</span><span class="ht">&gt;</span><span class="hs">Male</span><span class="ht">&lt;/label&gt;</span>
+  <span class="ht">&lt;input</span> <span class="ha">type</span>=<span class="hv">"radio"</span> <span class="ha">name</span>=<span class="hv">"gender"</span> <span class="ha">value</span>=<span class="hv">"female"</span> <span class="ha">id</span>=<span class="hv">"female"</span><span class="ht">&gt;</span>
+  <span class="ht">&lt;label</span> <span class="ha">for</span>=<span class="hv">"female"</span><span class="ht">&gt;</span><span class="hs">Female</span><span class="ht">&lt;/label&gt;</span>
+
+  <span class="hc">&lt;!-- Checkbox --&gt;</span>
+  <span class="ht">&lt;input</span> <span class="ha">type</span>=<span class="hv">"checkbox"</span> <span class="ha">name</span>=<span class="hv">"terms"</span> <span class="ha">id</span>=<span class="hv">"terms"</span> <span class="ha">required</span><span class="ht">&gt;</span>
+  <span class="ht">&lt;label</span> <span class="ha">for</span>=<span class="hv">"terms"</span><span class="ht">&gt;</span><span class="hs">I agree to Terms</span><span class="ht">&lt;/label&gt;</span>
+
+  <span class="hc">&lt;!-- Datalist (autocomplete suggestions) --&gt;</span>
+  <span class="ht">&lt;input</span> <span class="ha">list</span>=<span class="hv">"cities"</span> <span class="ha">name</span>=<span class="hv">"city"</span><span class="ht">&gt;</span>
+  <span class="ht">&lt;datalist</span> <span class="ha">id</span>=<span class="hv">"cities"</span><span class="ht">&gt;</span>
+    <span class="ht">&lt;option</span> <span class="ha">value</span>=<span class="hv">"Mumbai"</span><span class="ht">&gt;</span>
+    <span class="ht">&lt;option</span> <span class="ha">value</span>=<span class="hv">"Delhi"</span><span class="ht">&gt;</span>
+  <span class="ht">&lt;/datalist&gt;</span>
+
+  <span class="hc">&lt;!-- Fieldset & Legend --&gt;</span>
+  <span class="ht">&lt;fieldset&gt;</span>
+    <span class="ht">&lt;legend&gt;</span><span class="hs">Personal Info</span><span class="ht">&lt;/legend&gt;</span>
+    <span class="ht">&lt;input</span> <span class="ha">type</span>=<span class="hv">"text"</span> <span class="ha">name</span>=<span class="hv">"fname"</span><span class="ht">&gt;</span>
+  <span class="ht">&lt;/fieldset&gt;</span>
+
+  <span class="hc">&lt;!-- Buttons --&gt;</span>
+  <span class="ht">&lt;button</span> <span class="ha">type</span>=<span class="hv">"submit"</span><span class="ht">&gt;</span><span class="hs">Submit</span><span class="ht">&lt;/button&gt;</span>
+  <span class="ht">&lt;button</span> <span class="ha">type</span>=<span class="hv">"reset"</span><span class="ht">&gt;</span><span class="hs">Reset</span><span class="ht">&lt;/button&gt;</span>
+  <span class="ht">&lt;button</span> <span class="ha">type</span>=<span class="hv">"button"</span> <span class="ha">onclick</span>=<span class="hv">"doSomething()"</span><span class="ht">&gt;</span><span class="hs">Click Me</span><span class="ht">&lt;/button&gt;</span>
+  <span class="ht">&lt;input</span> <span class="ha">type</span>=<span class="hv">"submit"</span> <span class="ha">value</span>=<span class="hv">"Submit"</span><span class="ht">&gt;</span>
+
+<span class="ht">&lt;/form&gt;</span></pre>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- =========================================
+         9. SEMANTIC HTML
+    ========================================= -->
+        <div class="section" id="semantic">
+          <div class="section-header">
+            <div class="section-icon icon-teal">🧱</div>
+            <h2>Semantic HTML5</h2>
+            <span class="section-num">09</span>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Why Semantic HTML?</div>
+            <p>
+              Semantic tags tell the browser (and screen readers, search
+              engines) the <em>meaning</em> of content, not just how it looks.
+              Use <code>&lt;article&gt;</code> instead of
+              <code>&lt;div class="article"&gt;</code>. This improves SEO,
+              accessibility, and code readability.
+            </p>
+          </div>
+
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-label">Semantic Page Structure</span>
+              <div class="code-dots">
+                <span class="d1"></span><span class="d2"></span
+                ><span class="d3"></span>
+              </div>
+            </div>
+            <pre><span class="ht">&lt;body&gt;</span>
+
+  <span class="ht">&lt;header&gt;</span>                          <span class="hc">&lt;!-- Site header / hero --&gt;</span>
+    <span class="ht">&lt;nav&gt;</span>                           <span class="hc">&lt;!-- Navigation links --&gt;</span>
+      <span class="ht">&lt;ul&gt;</span>
+        <span class="ht">&lt;li&gt;&lt;a</span> <span class="ha">href</span>=<span class="hv">"/"</span><span class="ht">&gt;</span><span class="hs">Home</span><span class="ht">&lt;/a&gt;&lt;/li&gt;</span>
+        <span class="ht">&lt;li&gt;&lt;a</span> <span class="ha">href</span>=<span class="hv">"/about"</span><span class="ht">&gt;</span><span class="hs">About</span><span class="ht">&lt;/a&gt;&lt;/li&gt;</span>
+      <span class="ht">&lt;/ul&gt;</span>
+    <span class="ht">&lt;/nav&gt;</span>
+  <span class="ht">&lt;/header&gt;</span>
+
+  <span class="ht">&lt;main&gt;</span>                            <span class="hc">&lt;!-- Primary content (only ONE per page) --&gt;</span>
+
+    <span class="ht">&lt;section&gt;</span>                      <span class="hc">&lt;!-- Thematic grouping with heading --&gt;</span>
+      <span class="ht">&lt;h2&gt;</span><span class="hs">Latest Articles</span><span class="ht">&lt;/h2&gt;</span>
+
+      <span class="ht">&lt;article&gt;</span>                    <span class="hc">&lt;!-- Self-contained content (blog post) --&gt;</span>
+        <span class="ht">&lt;header&gt;</span>
+          <span class="ht">&lt;h3&gt;</span><span class="hs">Article Title</span><span class="ht">&lt;/h3&gt;</span>
+          <span class="ht">&lt;time</span> <span class="ha">datetime</span>=<span class="hv">"2025-01-15"</span><span class="ht">&gt;</span><span class="hs">January 15, 2025</span><span class="ht">&lt;/time&gt;</span>
+        <span class="ht">&lt;/header&gt;</span>
+        <span class="ht">&lt;p&gt;</span><span class="hs">Article content...</span><span class="ht">&lt;/p&gt;</span>
+        <span class="ht">&lt;footer&gt;</span>
+          <span class="ht">&lt;address&gt;</span><span class="hs">By <span class="ht">&lt;a</span> <span class="ha">href</span>=<span class="hv">"mailto:a@b.com"</span><span class="ht">&gt;</span>Author Name<span class="ht">&lt;/a&gt;</span></span><span class="ht">&lt;/address&gt;</span>
+        <span class="ht">&lt;/footer&gt;</span>
+      <span class="ht">&lt;/article&gt;</span>
+
+    <span class="ht">&lt;/section&gt;</span>
+
+    <span class="ht">&lt;aside&gt;</span>                         <span class="hc">&lt;!-- Sidebar / tangentially related --&gt;</span>
+      <span class="ht">&lt;h3&gt;</span><span class="hs">Related Links</span><span class="ht">&lt;/h3&gt;</span>
+    <span class="ht">&lt;/aside&gt;</span>
+
+    <span class="ht">&lt;details&gt;</span>                      <span class="hc">&lt;!-- Expandable/collapsible content --&gt;</span>
+      <span class="ht">&lt;summary&gt;</span><span class="hs">Click to expand</span><span class="ht">&lt;/summary&gt;</span>
+      <span class="ht">&lt;p&gt;</span><span class="hs">Hidden content revealed on click!</span><span class="ht">&lt;/p&gt;</span>
+    <span class="ht">&lt;/details&gt;</span>
+
+  <span class="ht">&lt;/main&gt;</span>
+
+  <span class="ht">&lt;footer&gt;</span>                          <span class="hc">&lt;!-- Site footer --&gt;</span>
+    <span class="ht">&lt;p&gt;</span><span class="hs">&amp;copy; 2025 My Website</span><span class="ht">&lt;/p&gt;</span>
+  <span class="ht">&lt;/footer&gt;</span>
+
+<span class="ht">&lt;/body&gt;</span></pre>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- =========================================
+         10. META TAGS
+    ========================================= -->
+        <div class="section" id="meta">
+          <div class="section-header">
+            <div class="section-icon icon-purple">🔖</div>
+            <h2>Meta & Head Tags</h2>
+            <span class="section-num">10</span>
+          </div>
+
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-label">Complete Head Section</span>
+              <div class="code-dots">
+                <span class="d1"></span><span class="d2"></span
+                ><span class="d3"></span>
+              </div>
+            </div>
+            <pre><span class="ht">&lt;head&gt;</span>
+  <span class="hc">&lt;!-- Character encoding --&gt;</span>
+  <span class="ht">&lt;meta</span> <span class="ha">charset</span>=<span class="hv">"UTF-8"</span><span class="ht">&gt;</span>
+
+  <span class="hc">&lt;!-- Responsive viewport --&gt;</span>
+  <span class="ht">&lt;meta</span> <span class="ha">name</span>=<span class="hv">"viewport"</span> <span class="ha">content</span>=<span class="hv">"width=device-width, initial-scale=1.0"</span><span class="ht">&gt;</span>
+
+  <span class="hc">&lt;!-- SEO meta tags --&gt;</span>
+  <span class="ht">&lt;title&gt;</span><span class="hs">Page Title | Brand Name</span><span class="ht">&lt;/title&gt;</span>
+  <span class="ht">&lt;meta</span> <span class="ha">name</span>=<span class="hv">"description"</span> <span class="ha">content</span>=<span class="hv">"160 char description for search engines"</span><span class="ht">&gt;</span>
+  <span class="ht">&lt;meta</span> <span class="ha">name</span>=<span class="hv">"keywords"</span> <span class="ha">content</span>=<span class="hv">"html, css, web development"</span><span class="ht">&gt;</span>
+  <span class="ht">&lt;meta</span> <span class="ha">name</span>=<span class="hv">"author"</span> <span class="ha">content</span>=<span class="hv">"Your Name"</span><span class="ht">&gt;</span>
+  <span class="ht">&lt;meta</span> <span class="ha">name</span>=<span class="hv">"robots"</span> <span class="ha">content</span>=<span class="hv">"index, follow"</span><span class="ht">&gt;</span>
+
+  <span class="hc">&lt;!-- Open Graph (social media sharing) --&gt;</span>
+  <span class="ht">&lt;meta</span> <span class="ha">property</span>=<span class="hv">"og:title"</span> <span class="ha">content</span>=<span class="hv">"Page Title"</span><span class="ht">&gt;</span>
+  <span class="ht">&lt;meta</span> <span class="ha">property</span>=<span class="hv">"og:description"</span> <span class="ha">content</span>=<span class="hv">"Description for Facebook/LinkedIn"</span><span class="ht">&gt;</span>
+  <span class="ht">&lt;meta</span> <span class="ha">property</span>=<span class="hv">"og:image"</span> <span class="ha">content</span>=<span class="hv">"https://example.com/og-image.jpg"</span><span class="ht">&gt;</span>
+  <span class="ht">&lt;meta</span> <span class="ha">property</span>=<span class="hv">"og:url"</span> <span class="ha">content</span>=<span class="hv">"https://example.com/page"</span><span class="ht">&gt;</span>
+  <span class="ht">&lt;meta</span> <span class="ha">property</span>=<span class="hv">"og:type"</span> <span class="ha">content</span>=<span class="hv">"website"</span><span class="ht">&gt;</span>
+
+  <span class="hc">&lt;!-- Twitter card --&gt;</span>
+  <span class="ht">&lt;meta</span> <span class="ha">name</span>=<span class="hv">"twitter:card"</span> <span class="ha">content</span>=<span class="hv">"summary_large_image"</span><span class="ht">&gt;</span>
+  <span class="ht">&lt;meta</span> <span class="ha">name</span>=<span class="hv">"twitter:title"</span> <span class="ha">content</span>=<span class="hv">"Page Title"</span><span class="ht">&gt;</span>
+
+  <span class="hc">&lt;!-- Favicon --&gt;</span>
+  <span class="ht">&lt;link</span> <span class="ha">rel</span>=<span class="hv">"icon"</span> <span class="ha">href</span>=<span class="hv">"/favicon.ico"</span><span class="ht">&gt;</span>
+  <span class="ht">&lt;link</span> <span class="ha">rel</span>=<span class="hv">"apple-touch-icon"</span> <span class="ha">href</span>=<span class="hv">"/apple-touch-icon.png"</span><span class="ht">&gt;</span>
+
+  <span class="hc">&lt;!-- CSS --&gt;</span>
+  <span class="ht">&lt;link</span> <span class="ha">rel</span>=<span class="hv">"stylesheet"</span> <span class="ha">href</span>=<span class="hv">"styles.css"</span><span class="ht">&gt;</span>
+
+  <span class="hc">&lt;!-- Canonical URL (avoids duplicate content) --&gt;</span>
+  <span class="ht">&lt;link</span> <span class="ha">rel</span>=<span class="hv">"canonical"</span> <span class="ha">href</span>=<span class="hv">"https://example.com/page"</span><span class="ht">&gt;</span>
+
+  <span class="hc">&lt;!-- Theme color (mobile browser bar) --&gt;</span>
+  <span class="ht">&lt;meta</span> <span class="ha">name</span>=<span class="hv">"theme-color"</span> <span class="ha">content</span>=<span class="hv">"#7c6af7"</span><span class="ht">&gt;</span>
+
+  <span class="hc">&lt;!-- Google Fonts --&gt;</span>
+  <span class="ht">&lt;link</span> <span class="ha">rel</span>=<span class="hv">"preconnect"</span> <span class="ha">href</span>=<span class="hv">"https://fonts.googleapis.com"</span><span class="ht">&gt;</span>
+  <span class="ht">&lt;link</span> <span class="ha">href</span>=<span class="hv">"https://fonts.googleapis.com/css2?family=Roboto&display=swap"</span> <span class="ha">rel</span>=<span class="hv">"stylesheet"</span><span class="ht">&gt;</span>
+
+  <span class="hc">&lt;!-- Script (defer = run after HTML parsed) --&gt;</span>
+  <span class="ht">&lt;script</span> <span class="ha">src</span>=<span class="hv">"app.js"</span> <span class="ha">defer</span><span class="ht">&gt;&lt;/script&gt;</span>
+<span class="ht">&lt;/head&gt;</span></pre>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- =========================================
+         11. AUDIO & VIDEO
+    ========================================= -->
+        <div class="section" id="media">
+          <div class="section-header">
+            <div class="section-icon icon-pink">🎬</div>
+            <h2>Audio & Video</h2>
+            <span class="section-num">11</span>
+          </div>
+
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-label">HTML5 Media Elements</span>
+              <div class="code-dots">
+                <span class="d1"></span><span class="d2"></span
+                ><span class="d3"></span>
+              </div>
+            </div>
+            <pre><span class="hc">&lt;!-- Video --&gt;</span>
+<span class="ht">&lt;video</span>
+  <span class="ha">width</span>=<span class="hv">"640"</span>
+  <span class="ha">height</span>=<span class="hv">"360"</span>
+  <span class="ha">controls</span>              <span class="hc">&lt;!-- show controls --&gt;</span>
+  <span class="ha">autoplay</span>              <span class="hc">&lt;!-- auto-play (needs muted in most browsers) --&gt;</span>
+  <span class="ha">muted</span>                 <span class="hc">&lt;!-- required for autoplay --&gt;</span>
+  <span class="ha">loop</span>                  <span class="hc">&lt;!-- repeat --&gt;</span>
+  <span class="ha">poster</span>=<span class="hv">"thumbnail.jpg"</span>  <span class="hc">&lt;!-- preview image --&gt;</span>
+<span class="ht">&gt;</span>
+  <span class="ht">&lt;source</span> <span class="ha">src</span>=<span class="hv">"video.mp4"</span> <span class="ha">type</span>=<span class="hv">"video/mp4"</span><span class="ht">&gt;</span>
+  <span class="ht">&lt;source</span> <span class="ha">src</span>=<span class="hv">"video.webm"</span> <span class="ha">type</span>=<span class="hv">"video/webm"</span><span class="ht">&gt;</span>
+  <span class="ht">&lt;track</span> <span class="ha">kind</span>=<span class="hv">"subtitles"</span> <span class="ha">src</span>=<span class="hv">"subs.vtt"</span> <span class="ha">srclang</span>=<span class="hv">"en"</span> <span class="ha">label</span>=<span class="hv">"English"</span><span class="ht">&gt;</span>
+  <span class="hs">Your browser does not support video.</span>  <span class="hc">&lt;!-- fallback --&gt;</span>
+<span class="ht">&lt;/video&gt;</span>
+
+<span class="hc">&lt;!-- Audio --&gt;</span>
+<span class="ht">&lt;audio</span> <span class="ha">controls</span> <span class="ha">loop</span><span class="ht">&gt;</span>
+  <span class="ht">&lt;source</span> <span class="ha">src</span>=<span class="hv">"audio.mp3"</span> <span class="ha">type</span>=<span class="hv">"audio/mpeg"</span><span class="ht">&gt;</span>
+  <span class="ht">&lt;source</span> <span class="ha">src</span>=<span class="hv">"audio.ogg"</span> <span class="ha">type</span>=<span class="hv">"audio/ogg"</span><span class="ht">&gt;</span>
+  <span class="hs">Your browser does not support audio.</span>
+<span class="ht">&lt;/audio&gt;</span>
+
+<span class="hc">&lt;!-- Embed YouTube --&gt;</span>
+<span class="ht">&lt;iframe</span>
+  <span class="ha">width</span>=<span class="hv">"560"</span> <span class="ha">height</span>=<span class="hv">"315"</span>
+  <span class="ha">src</span>=<span class="hv">"https://www.youtube.com/embed/VIDEO_ID"</span>
+  <span class="ha">title</span>=<span class="hv">"YouTube video"</span>
+  <span class="ha">allowfullscreen</span>
+  <span class="ha">loading</span>=<span class="hv">"lazy"</span>
+<span class="ht">&gt;&lt;/iframe&gt;</span></pre>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- =========================================
+         12. CANVAS & SVG
+    ========================================= -->
+        <div class="section" id="canvas">
+          <div class="section-header">
+            <div class="section-icon icon-purple">🎨</div>
+            <h2>Canvas & SVG</h2>
+            <span class="section-num">12</span>
+          </div>
+
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-label">Canvas API</span>
+              <div class="code-dots">
+                <span class="d1"></span><span class="d2"></span
+                ><span class="d3"></span>
+              </div>
+            </div>
+            <pre><span class="hc">&lt;!-- Canvas element --&gt;</span>
+<span class="ht">&lt;canvas</span> <span class="ha">id</span>=<span class="hv">"myCanvas"</span> <span class="ha">width</span>=<span class="hv">"400"</span> <span class="ha">height</span>=<span class="hv">"300"</span><span class="ht">&gt;</span>
+  <span class="hs">Fallback text for non-canvas browsers</span>
+<span class="ht">&lt;/canvas&gt;</span>
+
+<span class="ht">&lt;script&gt;</span>
+  <span class="hk">const</span> canvas = document.getElementById(<span class="hv">'myCanvas'</span>);
+  <span class="hk">const</span> ctx = canvas.getContext(<span class="hv">'2d'</span>);
+
+  <span class="hc">// Draw a filled rectangle</span>
+  ctx.fillStyle = <span class="hv">'#7c6af7'</span>;
+  ctx.fillRect(<span class="hm">50</span>, <span class="hm">50</span>, <span class="hm">150</span>, <span class="hm">100</span>);
+
+  <span class="hc">// Draw a circle</span>
+  ctx.beginPath();
+  ctx.arc(<span class="hm">250</span>, <span class="hm">100</span>, <span class="hm">50</span>, <span class="hm">0</span>, Math.PI * <span class="hm">2</span>);
+  ctx.fillStyle = <span class="hv">'#3ecfb2'</span>;
+  ctx.fill();
+
+  <span class="hc">// Draw text</span>
+  ctx.font = <span class="hv">'24px sans-serif'</span>;
+  ctx.fillStyle = <span class="hv">'white'</span>;
+  ctx.fillText(<span class="hv">'Hello Canvas!'</span>, <span class="hm">50</span>, <span class="hm">200</span>);
+<span class="ht">&lt;/script&gt;</span></pre>
+          </div>
+
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-label">Inline SVG</span>
+              <div class="code-dots">
+                <span class="d1"></span><span class="d2"></span
+                ><span class="d3"></span>
+              </div>
+            </div>
+            <pre><span class="hc">&lt;!-- SVG directly in HTML --&gt;</span>
+<span class="ht">&lt;svg</span> <span class="ha">width</span>=<span class="hv">"200"</span> <span class="ha">height</span>=<span class="hv">"200"</span> <span class="ha">viewBox</span>=<span class="hv">"0 0 200 200"</span> <span class="ha">xmlns</span>=<span class="hv">"http://www.w3.org/2000/svg"</span><span class="ht">&gt;</span>
+
+  <span class="hc">&lt;!-- Circle --&gt;</span>
+  <span class="ht">&lt;circle</span> <span class="ha">cx</span>=<span class="hv">"100"</span> <span class="ha">cy</span>=<span class="hv">"100"</span> <span class="ha">r</span>=<span class="hv">"80"</span> <span class="ha">fill</span>=<span class="hv">"#7c6af7"</span><span class="ht">/&gt;</span>
+
+  <span class="hc">&lt;!-- Rectangle --&gt;</span>
+  <span class="ht">&lt;rect</span> <span class="ha">x</span>=<span class="hv">"20"</span> <span class="ha">y</span>=<span class="hv">"20"</span> <span class="ha">width</span>=<span class="hv">"60"</span> <span class="ha">height</span>=<span class="hv">"60"</span> <span class="ha">fill</span>=<span class="hv">"#3ecfb2"</span> <span class="ha">rx</span>=<span class="hv">"8"</span><span class="ht">/&gt;</span>
+
+  <span class="hc">&lt;!-- Line --&gt;</span>
+  <span class="ht">&lt;line</span> <span class="ha">x1</span>=<span class="hv">"0"</span> <span class="ha">y1</span>=<span class="hv">"0"</span> <span class="ha">x2</span>=<span class="hv">"200"</span> <span class="ha">y2</span>=<span class="hv">"200"</span> <span class="ha">stroke</span>=<span class="hv">"white"</span> <span class="ha">stroke-width</span>=<span class="hv">"2"</span><span class="ht">/&gt;</span>
+
+  <span class="hc">&lt;!-- Path (custom shape) --&gt;</span>
+  <span class="ht">&lt;path</span> <span class="ha">d</span>=<span class="hv">"M 10 80 Q 95 10 180 80"</span> <span class="ha">fill</span>=<span class="hv">"none"</span> <span class="ha">stroke</span>=<span class="hv">"#f79c6a"</span> <span class="ha">stroke-width</span>=<span class="hv">"3"</span><span class="ht">/&gt;</span>
+
+  <span class="hc">&lt;!-- Text --&gt;</span>
+  <span class="ht">&lt;text</span> <span class="ha">x</span>=<span class="hv">"100"</span> <span class="ha">y</span>=<span class="hv">"105"</span> <span class="ha">text-anchor</span>=<span class="hv">"middle"</span> <span class="ha">fill</span>=<span class="hv">"white"</span><span class="ht">&gt;</span><span class="hs">SVG</span><span class="ht">&lt;/text&gt;</span>
+
+<span class="ht">&lt;/svg&gt;</span></pre>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- =========================================
+         13. HTML APIS
+    ========================================= -->
+        <div class="section" id="apis">
+          <div class="section-header">
+            <div class="section-icon icon-orange">⚡</div>
+            <h2>HTML APIs & Features</h2>
+            <span class="section-num">13</span>
+          </div>
+
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-label"
+                >Data Attributes, Templates & Custom</span
+              >
+              <div class="code-dots">
+                <span class="d1"></span><span class="d2"></span
+                ><span class="d3"></span>
+              </div>
+            </div>
+            <pre><span class="hc">&lt;!-- DATA ATTRIBUTES: store custom data on elements --&gt;</span>
+<span class="ht">&lt;div</span>
+  <span class="ha">data-user-id</span>=<span class="hv">"42"</span>
+  <span class="ha">data-role</span>=<span class="hv">"admin"</span>
+  <span class="ha">data-active</span>=<span class="hv">"true"</span>
+<span class="ht">&gt;</span><span class="hs">User Card</span><span class="ht">&lt;/div&gt;</span>
+
+<span class="ht">&lt;script&gt;</span>
+  <span class="hk">const</span> el = document.querySelector(<span class="hv">'div'</span>);
+  console.log(el.dataset.userId);   <span class="hc">// "42"</span>
+  console.log(el.dataset.role);     <span class="hc">// "admin"</span>
+<span class="ht">&lt;/script&gt;</span>
+
+<span class="hc">&lt;!-- HTML TEMPLATE: reusable content (not rendered) --&gt;</span>
+<span class="ht">&lt;template</span> <span class="ha">id</span>=<span class="hv">"card-template"</span><span class="ht">&gt;</span>
+  <span class="ht">&lt;div</span> <span class="ha">class</span>=<span class="hv">"card"</span><span class="ht">&gt;</span>
+    <span class="ht">&lt;h3</span> <span class="ha">class</span>=<span class="hv">"card-title"</span><span class="ht">&gt;&lt;/h3&gt;</span>
+    <span class="ht">&lt;p</span> <span class="ha">class</span>=<span class="hv">"card-body"</span><span class="ht">&gt;&lt;/p&gt;</span>
+  <span class="ht">&lt;/div&gt;</span>
+<span class="ht">&lt;/template&gt;</span>
+
+<span class="ht">&lt;script&gt;</span>
+  <span class="hk">const</span> tmpl = document.getElementById(<span class="hv">'card-template'</span>);
+  <span class="hk">const</span> clone = tmpl.content.cloneNode(<span class="hm">true</span>);
+  clone.querySelector(<span class="hv">'.card-title'</span>).textContent = <span class="hv">'Title'</span>;
+  document.body.appendChild(clone);
+<span class="ht">&lt;/script&gt;</span>
+
+<span class="hc">&lt;!-- DIALOG (native modal) --&gt;</span>
+<span class="ht">&lt;dialog</span> <span class="ha">id</span>=<span class="hv">"myDialog"</span><span class="ht">&gt;</span>
+  <span class="ht">&lt;p&gt;</span><span class="hs">Native HTML modal dialog!</span><span class="ht">&lt;/p&gt;</span>
+  <span class="ht">&lt;button</span> <span class="ha">onclick</span>=<span class="hv">"document.getElementById('myDialog').close()"</span><span class="ht">&gt;</span><span class="hs">Close</span><span class="ht">&lt;/button&gt;</span>
+<span class="ht">&lt;/dialog&gt;</span>
+<span class="ht">&lt;button</span> <span class="ha">onclick</span>=<span class="hv">"document.getElementById('myDialog').showModal()"</span><span class="ht">&gt;</span><span class="hs">Open Modal</span><span class="ht">&lt;/button&gt;</span>
+
+<span class="hc">&lt;!-- PROGRESS BAR --&gt;</span>
+<span class="ht">&lt;progress</span> <span class="ha">value</span>=<span class="hv">"70"</span> <span class="ha">max</span>=<span class="hv">"100"</span><span class="ht">&gt;</span><span class="hs">70%</span><span class="ht">&lt;/progress&gt;</span>
+
+<span class="hc">&lt;!-- METER (measurement in a range) --&gt;</span>
+<span class="ht">&lt;meter</span> <span class="ha">value</span>=<span class="hv">"0.6"</span> <span class="ha">min</span>=<span class="hv">"0"</span> <span class="ha">max</span>=<span class="hv">"1"</span> <span class="ha">low</span>=<span class="hv">"0.25"</span> <span class="ha">high</span>=<span class="hv">"0.75"</span><span class="ht">&gt;</span><span class="hs">60%</span><span class="ht">&lt;/meter&gt;</span>
+
+<span class="hc">&lt;!-- CONTENTEDITABLE --&gt;</span>
+<span class="ht">&lt;div</span> <span class="ha">contenteditable</span>=<span class="hv">"true"</span><span class="ht">&gt;</span><span class="hs">Click me to edit this text!</span><span class="ht">&lt;/div&gt;</span>
+
+<span class="hc">&lt;!-- SPELLCHECK --&gt;</span>
+<span class="ht">&lt;textarea</span> <span class="ha">spellcheck</span>=<span class="hv">"true"</span><span class="ht">&gt;&lt;/textarea&gt;</span>
+
+<span class="hc">&lt;!-- DRAGGABLE --&gt;</span>
+<span class="ht">&lt;div</span> <span class="ha">draggable</span>=<span class="hv">"true"</span> <span class="ha">ondragstart</span>=<span class="hv">"handleDrag(event)"</span><span class="ht">&gt;</span><span class="hs">Drag me!</span><span class="ht">&lt;/div&gt;</span></pre>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- =========================================
+         14. ACCESSIBILITY
+    ========================================= -->
+        <div class="section" id="accessibility">
+          <div class="section-header">
+            <div class="section-icon icon-teal">♿</div>
+            <h2>Accessibility (A11y)</h2>
+            <span class="section-num">14</span>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Why Accessibility?</div>
+            <p>
+              About 15% of the world's population lives with some form of
+              disability. Accessible HTML ensures your website works for
+              everyone — screen reader users, keyboard-only users, and people
+              with visual or motor impairments. It also improves SEO.
+            </p>
+          </div>
+
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-label">ARIA & Accessibility Patterns</span>
+              <div class="code-dots">
+                <span class="d1"></span><span class="d2"></span
+                ><span class="d3"></span>
+              </div>
+            </div>
+            <pre><span class="hc">&lt;!-- ARIA ROLES --&gt;</span>
+<span class="ht">&lt;div</span> <span class="ha">role</span>=<span class="hv">"navigation"</span> <span class="ha">aria-label</span>=<span class="hv">"Main navigation"</span><span class="ht">&gt;</span><span class="hs">...</span><span class="ht">&lt;/div&gt;</span>
+<span class="ht">&lt;div</span> <span class="ha">role</span>=<span class="hv">"alert"</span><span class="ht">&gt;</span><span class="hs">Form submitted successfully!</span><span class="ht">&lt;/div&gt;</span>
+<span class="ht">&lt;div</span> <span class="ha">role</span>=<span class="hv">"status"</span> <span class="ha">aria-live</span>=<span class="hv">"polite"</span><span class="ht">&gt;</span><span class="hs">Loading...</span><span class="ht">&lt;/div&gt;</span>
+
+<span class="hc">&lt;!-- ARIA LABELS --&gt;</span>
+<span class="ht">&lt;button</span> <span class="ha">aria-label</span>=<span class="hv">"Close dialog"</span><span class="ht">&gt;</span><span class="hs">✕</span><span class="ht">&lt;/button&gt;</span>
+<span class="ht">&lt;input</span> <span class="ha">aria-labelledby</span>=<span class="hv">"email-label"</span><span class="ht">&gt;</span>
+<span class="ht">&lt;span</span> <span class="ha">id</span>=<span class="hv">"email-label"</span><span class="ht">&gt;</span><span class="hs">Email Address</span><span class="ht">&lt;/span&gt;</span>
+
+<span class="hc">&lt;!-- ARIA STATES --&gt;</span>
+<span class="ht">&lt;button</span> <span class="ha">aria-expanded</span>=<span class="hv">"false"</span> <span class="ha">aria-controls</span>=<span class="hv">"menu"</span><span class="ht">&gt;</span><span class="hs">Menu</span><span class="ht">&lt;/button&gt;</span>
+<span class="ht">&lt;nav</span> <span class="ha">id</span>=<span class="hv">"menu"</span> <span class="ha">aria-hidden</span>=<span class="hv">"true"</span><span class="ht">&gt;</span><span class="hs">...</span><span class="ht">&lt;/nav&gt;</span>
+
+<span class="ht">&lt;input</span> <span class="ha">aria-required</span>=<span class="hv">"true"</span> <span class="ha">aria-invalid</span>=<span class="hv">"false"</span><span class="ht">&gt;</span>
+<span class="ht">&lt;div</span> <span class="ha">aria-disabled</span>=<span class="hv">"true"</span><span class="ht">&gt;&lt;/div&gt;</span>
+
+<span class="hc">&lt;!-- SKIP LINKS --&gt;</span>
+<span class="ht">&lt;a</span> <span class="ha">href</span>=<span class="hv">"#main-content"</span> <span class="ha">class</span>=<span class="hv">"skip-link"</span><span class="ht">&gt;</span><span class="hs">Skip to main content</span><span class="ht">&lt;/a&gt;</span>
+
+<span class="hc">&lt;!-- KEYBOARD NAVIGATION --&gt;</span>
+<span class="ht">&lt;div</span> <span class="ha">tabindex</span>=<span class="hv">"0"</span><span class="ht">&gt;</span><span class="hs">Focusable div</span><span class="ht">&lt;/div&gt;</span>    <span class="hc">&lt;!-- In tab order --&gt;</span>
+<span class="ht">&lt;div</span> <span class="ha">tabindex</span>=<span class="hv">"-1"</span><span class="ht">&gt;</span><span class="hs">Programmatic focus</span><span class="ht">&lt;/div&gt;</span><span class="hc">&lt;!-- focus() only --&gt;</span>
+
+<span class="hc">&lt;!-- LANG ATTRIBUTE (screen readers) --&gt;</span>
+<span class="ht">&lt;html</span> <span class="ha">lang</span>=<span class="hv">"en"</span><span class="ht">&gt;</span>
+<span class="ht">&lt;span</span> <span class="ha">lang</span>=<span class="hv">"fr"</span><span class="ht">&gt;</span><span class="hs">Bonjour</span><span class="ht">&lt;/span&gt;</span>
+
+<span class="hc">&lt;!-- VISUALLY HIDDEN (screen reader only) --&gt;</span>
+<span class="ht">&lt;span</span> <span class="ha">style</span>=<span class="hv">"position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)"</span><span class="ht">&gt;</span>
+  <span class="hs">Screen reader only text</span>
+<span class="ht">&lt;/span&gt;</span></pre>
+          </div>
+
+          <div class="info-box tip">
+            <span class="icon">✦</span>
+            <p>
+              <strong>Golden rule:</strong> First rule of ARIA is — don't use
+              ARIA. Use native semantic HTML elements first. Only add ARIA when
+              native HTML can't express the needed semantics.
+            </p>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- =========================================
+         15. CHEAT SHEET
+    ========================================= -->
+        <div class="section" id="cheatsheet">
+          <div class="section-header">
+            <div class="section-icon icon-purple">⚡</div>
+            <h2>Quick Reference Cheat Sheet</h2>
+            <span class="section-num">15</span>
+          </div>
+
+          <div class="tags-grid">
+            <div class="tag-card">
+              <div class="tag-name">&lt;!DOCTYPE html&gt;</div>
+              <div class="tag-desc">HTML5 declaration</div>
+            </div>
+            <div class="tag-card">
+              <div class="tag-name">&lt;html lang="en"&gt;</div>
+              <div class="tag-desc">Root element with language</div>
+            </div>
+            <div class="tag-card">
+              <div class="tag-name">&lt;head&gt;&lt;/head&gt;</div>
+              <div class="tag-desc">Metadata container</div>
+            </div>
+            <div class="tag-card">
+              <div class="tag-name">&lt;body&gt;&lt;/body&gt;</div>
+              <div class="tag-desc">Visible page content</div>
+            </div>
+            <div class="tag-card">
+              <div class="tag-name">&lt;h1&gt;–&lt;h6&gt;</div>
+              <div class="tag-desc">Headings, h1 is most important</div>
+            </div>
+            <div class="tag-card">
+              <div class="tag-name">&lt;p&gt;</div>
+              <div class="tag-desc">Paragraph of text</div>
+            </div>
+            <div class="tag-card">
+              <div class="tag-name">&lt;a href=""&gt;</div>
+              <div class="tag-desc">Hyperlink / anchor</div>
+            </div>
+            <div class="tag-card">
+              <div class="tag-name">&lt;img src="" alt=""&gt;</div>
+              <div class="tag-desc">Image (alt is required!)</div>
+            </div>
+            <div class="tag-card">
+              <div class="tag-name">&lt;ul&gt; / &lt;ol&gt; / &lt;li&gt;</div>
+              <div class="tag-desc">Unordered / ordered lists</div>
+            </div>
+            <div class="tag-card">
+              <div class="tag-name">&lt;table&gt;&lt;tr&gt;&lt;td&gt;</div>
+              <div class="tag-desc">Table, row, cell</div>
+            </div>
+            <div class="tag-card">
+              <div class="tag-name">&lt;form action method&gt;</div>
+              <div class="tag-desc">Form container</div>
+            </div>
+            <div class="tag-card">
+              <div class="tag-name">&lt;input type=""&gt;</div>
+              <div class="tag-desc">25+ input types available</div>
+            </div>
+            <div class="tag-card">
+              <div class="tag-name">&lt;button&gt;</div>
+              <div class="tag-desc">Clickable button</div>
+            </div>
+            <div class="tag-card">
+              <div class="tag-name">&lt;div&gt; / &lt;span&gt;</div>
+              <div class="tag-desc">Generic block / inline containers</div>
+            </div>
+            <div class="tag-card">
+              <div class="tag-name">&lt;header&gt; / &lt;footer&gt;</div>
+              <div class="tag-desc">Semantic header/footer</div>
+            </div>
+            <div class="tag-card">
+              <div class="tag-name">&lt;main&gt; / &lt;aside&gt;</div>
+              <div class="tag-desc">Main content / sidebar</div>
+            </div>
+            <div class="tag-card">
+              <div class="tag-name">&lt;section&gt;</div>
+              <div class="tag-desc">Thematic section with heading</div>
+            </div>
+            <div class="tag-card">
+              <div class="tag-name">&lt;article&gt;</div>
+              <div class="tag-desc">Self-contained post/card</div>
+            </div>
+            <div class="tag-card">
+              <div class="tag-name">&lt;nav&gt;</div>
+              <div class="tag-desc">Navigation links</div>
+            </div>
+            <div class="tag-card">
+              <div class="tag-name">&lt;strong&gt; / &lt;em&gt;</div>
+              <div class="tag-desc">Bold (important) / Italic (emphasis)</div>
+            </div>
+            <div class="tag-card">
+              <div class="tag-name">&lt;br&gt; / &lt;hr&gt;</div>
+              <div class="tag-desc">Line break / horizontal rule</div>
+            </div>
+            <div class="tag-card">
+              <div class="tag-name">&lt;link rel="stylesheet"&gt;</div>
+              <div class="tag-desc">Link external CSS</div>
+            </div>
+            <div class="tag-card">
+              <div class="tag-name">&lt;script src="" defer&gt;</div>
+              <div class="tag-desc">Link external JS (defer recommended)</div>
+            </div>
+            <div class="tag-card">
+              <div class="tag-name">&lt;meta name="viewport"&gt;</div>
+              <div class="tag-desc">Responsive design meta tag</div>
+            </div>
+            <div class="tag-card">
+              <div class="tag-name">&lt;video&gt; / &lt;audio&gt;</div>
+              <div class="tag-desc">HTML5 media elements</div>
+            </div>
+            <div class="tag-card">
+              <div class="tag-name">&lt;canvas&gt;</div>
+              <div class="tag-desc">2D/3D drawing surface via JS</div>
+            </div>
+            <div class="tag-card">
+              <div class="tag-name">&lt;svg&gt;</div>
+              <div class="tag-desc">Scalable Vector Graphics inline</div>
+            </div>
+            <div class="tag-card">
+              <div class="tag-name">&lt;template&gt;</div>
+              <div class="tag-desc">Inert reusable HTML content</div>
+            </div>
+            <div class="tag-card">
+              <div class="tag-name">&lt;dialog&gt;</div>
+              <div class="tag-desc">Native modal dialog</div>
+            </div>
+            <div class="tag-card">
+              <div class="tag-name">&lt;details&gt; / &lt;summary&gt;</div>
+              <div class="tag-desc">Expandable disclosure widget</div>
+            </div>
+            <div class="tag-card">
+              <div class="tag-name">data-* attributes</div>
+              <div class="tag-desc">Custom data stored on elements</div>
+            </div>
+            <div class="tag-card">
+              <div class="tag-name">aria-* attributes</div>
+              <div class="tag-desc">Accessibility for screen readers</div>
+            </div>
+          </div>
+
+          <div class="info-box note">
+            <span class="icon">ℹ</span>
+            <p>
+              HTML entities: <code>&amp;amp;</code> = &amp; |
+              <code>&amp;lt;</code> = &lt; | <code>&amp;gt;</code> = &gt; |
+              <code>&amp;nbsp;</code> = non-breaking space |
+              <code>&amp;copy;</code> = © | <code>&amp;mdash;</code> = — |
+              <code>&amp;larr;</code> = ← | <code>&amp;rarr;</code> = →
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- /content -->
+    </main>
+  </body>
+</html>
