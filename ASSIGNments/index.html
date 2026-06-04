@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokemon Gen I - Pikachu</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Poppins:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary-yellow: #ffd32a;
+        --secondary-cream: #f5e9d3;
+        --text-black: #000000;
+        --accent-orange: #f3a022;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #e0e0e0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      /* Main Container */
+      .card {
+        width: 1000px;
+        height: 650px;
+        background: linear-gradient(
+          to right,
+          var(--primary-yellow) 60%,
+          var(--secondary-cream) 40%
+        );
+        border-radius: 20px;
+        position: relative;
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        display: flex;
+      }
+
+      /* Top Navigation */
+      .header {
+        position: absolute;
+        top: 40px;
+        left: 50px;
+        right: 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 10;
+      }
+
+      .logo {
+        width: 120px;
+      }
+
+      .menu-icon {
+        cursor: pointer;
+      }
+
+      .menu-line {
+        width: 30px;
+        height: 3px;
+        background-color: var(--text-black);
+        margin: 5px 0;
+        border-radius: 2px;
+      }
+
+      /* Background Decorations */
+      .pokeball-bg {
+        position: absolute;
+        bottom: -50px;
+        left: -50px;
+        width: 300px;
+        height: 300px;
+        border: 35px solid rgba(0, 0, 0, 0.05);
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .pokeball-bg::after {
+        content: '';
+        width: 80px;
+        height: 80px;
+        border: 25px solid rgba(0, 0, 0, 0.05);
+        border-radius: 50%;
+      }
+
+      /* Content Area */
+      .content {
+        padding: 160px 0 0 70px;
+        width: 50%;
+        z-index: 2;
+      }
+
+      .gen-tag {
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        color: rgba(0, 0, 0, 0.7);
+      }
+
+      .name {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 80px;
+        line-height: 1;
+        margin-bottom: 30px;
+        color: var(--text-black);
+      }
+
+      .description {
+        font-size: 15px;
+        line-height: 1.8;
+        color: rgba(0, 0, 0, 0.8);
+        max-width: 320px;
+        margin-bottom: 40px;
+      }
+
+      .pagination-text {
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .pagination-text::before {
+        content: '';
+        width: 35px;
+        height: 2px;
+        background: var(--text-black);
+      }
+
+      /* Character Image */
+      .pikachu-img {
+        position: absolute;
+        height: 85%;
+        bottom: 40px;
+        right: 50px;
+        z-index: 5;
+        filter: drop-shadow(20px 20px 40px rgba(0, 0, 0, 0.05));
+      }
+
+      /* Right Side Dots Navigation */
+      .dots-nav {
+        position: absolute;
+        right: 30px;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .dot {
+        width: 8px;
+        height: 8px;
+        background: var(--accent-orange);
+        border-radius: 50%;
+        opacity: 0.4;
+        cursor: pointer;
+      }
+
+      .dot.active {
+        opacity: 1;
+        background: var(--text-black);
+        transform: scale(1.3);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="header">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/9/98/International_Pok%C3%A9mon_logo.svg"
+          alt="Pokemon Logo"
+          class="logo"
+        />
+        <div class="menu-icon">
+          <div class="menu-line"></div>
+          <div class="menu-line"></div>
+          <div class="menu-line" style="width: 20px; margin-left: auto"></div>
+        </div>
+      </div>
+
+      <div class="pokeball-bg"></div>
+
+      <div class="content">
+        <p class="gen-tag">Pokemon Gen I</p>
+        <h3 class="name">Pikachu</h3>
+        <p class="description">
+          Pikachu is an Electric-type Pokémon introduced in Generation I.
+          Pikachu are small, chubby, and incredibly cute mouse-like Pokémon.
+          They are almost completely covered by yellow fur.
+        </p>
+        <div class="pagination-text">01 / 08</div>
+      </div>
+
+      <img
+        src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png"
+        alt="Pikachu"
+        class="pikachu-img"
+      />
+
+      <div class="dots-nav">
+        <div class="dot active"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+    </div>
+  </body>
+</html>

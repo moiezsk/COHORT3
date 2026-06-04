@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM POSHAN Maharashtra</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            orange: '#FF6B35',
+                            green: '#2EC4B6',
+                            darkBlue: '#011627',
+                            lightBg: '#F8F9FA'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'Noto Sans Devanagari', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@300;400;600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Animate.css for smooth entrance animations -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <style>
+        body {
+            font-family: 'Poppins', 'Noto Sans Devanagari', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .glow-effect:focus {
+            box-shadow: 0 0 15px rgba(255, 107, 53, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-brand-lightBg text-slate-800 dark:bg-slate-900 dark:text-slate-100 min-h-screen flex flex-col justify-between">
+
+    <!-- NAVIGATION BAR -->
+    <nav class="sticky top-0 z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md shadow-md px-6 py-4 flex justify-between items-center border-b border-gray-100 dark:border-slate-800">
+        <!-- Logo / Title -->
+        <div class="flex items-center space-x-3 animate__animated animate__fadeInLeft">
+            <div class="bg-gradient-to-tr from-brand-orange to-amber-500 p-2.5 rounded-xl text-white shadow-md">
+                <i class="fa-solid fa-utensils text-2xl"></i>
+            </div>
+            <div>
+                <h1 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white flex flex-col leading-tight">
+                    <span class="lang-en font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-brand-orange to-amber-600">PM POSHAN</span>
+                    <span class="lang-mr hidden font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-brand-orange to-amber-600">प्रधानमंत्री पोषण शक्ती निर्माण</span>
+                    <span class="text-xs text-gray-500 dark:text-gray-400 font-medium tracking-wide">Govt. of Maharashtra</span>
+                </h1>
+            </div>
+        </div>
+
+        <!-- Controls (Dark Mode & Language Toggle) -->
+        <div class="flex items-center space-x-4 animate__animated animate__fadeInRight">
+            <!-- Language Toggle Button -->
+            <button onclick="toggleLanguage()" class="flex items-center space-x-2 bg-slate-100 dark:bg-slate-800 px-4 py-2 rounded-full font-semibold text-sm hover:bg-brand-orange hover:text-white transition-all duration-300 shadow-sm border border-gray-200 dark:border-gray-700">
+                <i class="fa-solid fa-language text-lg"></i>
+                <span id="langBtnText">मराठी</span>
+            </button>
+
+            <!-- Dark Mode Toggle Button -->
+            <button onclick="toggleDarkMode()" class="p-2.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-amber-400 hover:scale-110 transition-transform shadow-sm border border-gray-200 dark:border-gray-700">
+                <i id="darkModeIcon" class="fa-solid fa-moon text-lg"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- HERO / MAIN CONTENT SECTION -->
+    <main class="container mx-auto px-6 py-12 flex-grow grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- LEFT SIDE: SCHEME INFO & VISUAL CARDS -->
+        <div class="lg:col-span-7 space-y-8 animate__animated animate__fadeInLeft">
+            <div class="space-y-4">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 dark:bg-emerald-950/50 dark:text-emerald-400">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span class="lang-en">School Education & Sports Department</span>
+                    <span class="lang-mr hidden">शालेय शिक्षण व क्रीडा विभाग</span>
+                </span>
+                
+                <h2 class="text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white leading-tight">
+                    <span class="lang-en">Nourishing Young Minds for a <span class="text-brand-orange">Brighter Maharashtra</span></span>
+                    <span class="lang-mr hidden">सशक्त बालके, समृद्ध महाराष्ट्र: <span class="text-brand-orange">शालेय पोषण आहार</span></span>
+                </h2>
+                
+                <p class="text-lg text-slate-600 dark:text-gray-300 leading-relaxed max-w-xl">
+                    <span class="lang-en">Providing freshly cooked, nutritious mid-day meals to millions of primary and upper-primary students across government and aided schools in Maharashtra.</span>
+                    <span class="lang-mr hidden">महाराष्ट्रातील शासकीय आणि अनुदानित शाळांमधील लाखो प्राथमिक व उच्च-प्राथमिक विद्यार्थ्यांना ताजा, शिजवलेला आणि पौष्टिक आहार पुरवणे.</span>
+                </p>
+            </div>
+
+            <!-- Feature Badges -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="flex items-center space-x-4 p-4 bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-800 hover:shadow-md transition-shadow">
+                    <div class="p-3 bg-orange-100 dark:bg-orange-950 text-brand-orange rounded-xl">
+                        <i class="fa-solid fa-wheat-awn text-xl"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-800 dark:text-white lang-en">Quality Grain</h4>
+                        <h4 class="font-bold text-slate-800 dark:text-white lang-mr hidden">उच्च दर्जाचे अन्नधान्य</h4>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 lang-en">FCI assured supply</p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 lang-mr hidden">एफआयसी मानांकित पुरवठा</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-4 p-4 bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-800 hover:shadow-md transition-shadow">
+                    <div class="p-3 bg-teal-100 dark:bg-teal-950 text-brand-green rounded-xl">
+                        <i class="fa-solid fa-shield-halved text-xl"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-800 dark:text-white lang-en">Hygiene First</h4>
+                        <h4 class="font-bold text-slate-800 dark:text-white lang-mr hidden">स्वच्छतेला प्राधान्य</h4>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 lang-en">Strict quality checks</p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 lang-mr hidden">कडक गुणवत्ता तपासणी</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-4 p-4 bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-800 hover:shadow-md transition-shadow">
+                    <div class="p-3 bg-blue-100 dark:bg-blue-950 text-blue-500 rounded-xl">
+                        <i class="fa-solid fa-chart-line text-xl"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-800 dark:text-white lang-en">Real-time MDM Tracker</h4>
+                        <h4 class="font-bold text-slate-800 dark:text-white lang-mr hidden">रिअल-टाइम ट्रॅकिंग</h4>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 lang-en">Daily attendance synced</p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 lang-mr hidden">दैनिक उपस्थिती समक्रमित</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-4 p-4 bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-800 hover:shadow-md transition-shadow">
+                    <div class="p-3 bg-purple-100 dark:bg-purple-950 text-purple-500 rounded-xl">
+                        <i class="fa-solid fa-hand-holding-hand text-xl"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-800 dark:text-white lang-en">Direct Benefit</h4>
+                        <h4 class="font-bold text-slate-800 dark:text-white lang-mr hidden">थेट लाभ हस्तांतरण</h4>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 lang-en">To cooks & helpers</p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 lang-mr hidden">स्वयंपाकी व मदतनीसांसाठी</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT SIDE: STYLISH PORTAL LOGIN SECTION WITH ANIMATIONS -->
+        <div class="lg:col-span-5 animate__animated animate__fadeInRight">
+            <div class="bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-xl border border-gray-100 dark:border-slate-700/50 relative overflow-hidden transition-all duration-300 hover:shadow-2xl group">
+                <!-- Top Decorative Wave Accent -->
+                <div class="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-brand-orange via-yellow-400 to-brand-green"></div>
+                
+                <div class="text-center mb-8">
+                    <div class="inline-flex p-4 bg-orange-50 dark:bg-slate-700 rounded-2xl text-brand-orange mb-3 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fa-solid fa-building-columns text-3xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white">
+                        <span class="lang-en">Official Portal</span>
+                        <span class="lang-mr hidden">अधिकृत लॉगिन</span>
+                    </h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                        <span class="lang-en">School & Officer Administration Login</span>
+                        <span class="lang-mr hidden">शाळा आणि अधिकारी प्रशासन लॉगिन</span>
+                    </p>
+                </div>
+
+                <form onsubmit="event.preventDefault();" class="space-y-5">
+                    <!-- Username Input Group -->
+                    <div class="space-y-1.5">
+                        <label class="text-xs font-bold uppercase tracking-wider text-gray-600 dark:text-gray-400 block">
+                            <span class="lang-en">User ID / Shalarth ID</span>
+                            <span class="lang-mr hidden">वापरकर्ता आयडी / शालार्थ आयडी</span>
+                        </label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-gray-400 dark:text-gray-500">
+                                <i class="fa-solid fa-user-shield"></i>
+                            </span>
+                            <input type="text" placeholder="e.g. SCH12345" class="w-full pl-11 pr-4 py-3 bg-slate-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-xl text-sm focus:outline-none focus:border-brand-orange focus:ring-2 focus:ring-orange-500/20 glow-effect text-slate-900 dark:text-white font-medium transition-all" required>
+                        </div>
+                    </div>
+
+                    <!-- Password Input Group -->
+                    <div class="space-y-1.5">
+                        <div class="flex justify-between items-center">
+                            <label class="text-xs font-bold uppercase tracking-wider text-gray-600 dark:text-gray-400 block">
+                                <span class="lang-en">Password</span>
+                                <span class="lang-mr hidden">पासवर्ड</span>
+                            </label>
+                            <a href="#" class="text-xs font-semibold text-brand-orange hover:underline">
+                                <span class="lang-en">Forgot?</span>
+                                <span class="lang-mr hidden">पासवर्ड विसरलात?</span>
+                            </a>
+                        </div>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-gray-400 dark:text-gray-500">
+                                <i class="fa-solid fa-lock"></i>
+                            </span>
+                            <input type="password" placeholder="••••••••" class="w-full pl-11 pr-4 py-3 bg-slate-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-xl text-sm focus:outline-none focus:border-brand-orange focus:ring-2 focus:ring-orange-500/20 glow-effect text-slate-900 dark:text-white font-medium transition-all" required>
+                        </div>
+                    </div>
+
+                    <!-- Role Dropdown Selection -->
+                    <div class="space-y-1.5">
+                        <label class="text-xs font-bold uppercase tracking-wider text-gray-600 dark:text-gray-400 block">
+                            <span class="lang-en">Select Role</span>
+                            <span class="lang-mr hidden">भूमिका निवडा</span>
+                        </label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-gray-400 dark:text-gray-500">
+                                <i class="fa-solid fa-users-gear"></i>
+                            </span>
+                            <select class="w-full pl-11 pr-4 py-3 bg-slate-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-xl text-sm focus:outline-none focus:border-brand-orange focus:ring-2 focus:ring-orange-500/20 text-slate-700 dark:text-gray-300 font-medium transition-all cursor-pointer appearance-none">
+                                <option class="lang-en">School Level User</option>
+                                <option class="lang-mr hidden">शाळा स्तर वापरकर्ता</option>
+                                <option class="lang-en">Block / Urban Level Officer</option>
+                                <option class="lang-mr hidden">गट / शहर स्तर अधिकारी</option>
+                                <option class="lang-en">District Level Officer</option>
+                                <option class="lang-mr hidden">जिल्हा स्तर अधिकारी</option>
+                            </select>
+                            <span class="absolute inset-y-0 right-0 flex items-center pr-4 text-gray-400 pointer-events-none">
+                                <i class="fa-solid fa-chevron-down text-xs"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Animated Submit Button -->
+                    <button type="submit" class="w-full py-3.5 mt-2 bg-gradient-to-r from-brand-orange to-amber-500 hover:from-amber-600 hover:to-brand-orange text-white font-bold rounded-xl shadow-lg shadow-orange-500/20 hover:shadow-orange-600/30 transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 flex items-center justify-center space-x-2 text-sm tracking-wide">
+                        <span class="lang-en">Secure Sign In</span>
+                        <span class="lang-mr hidden">सुरक्षित लॉग इन करा</span>
+                        <i class="fa-solid fa-arrow-right-to-bracket text-base"></i>
+                    </button>
+                </form>
+
+                <!-- Help Desk Line -->
+                <div class="mt-6 pt-4 border-t border-gray-100 dark:border-slate-700 flex justify-between items-center text-xs text-gray-500 dark:text-gray-400">
+                    <span class="flex items-center gap-1">
+                        <i class="fa-solid fa-headset text-brand-orange"></i> Helpdesk
+                    </span>
+                    <span class="font-semibold text-slate-700 dark:text-slate-300">1800-XX-XXXX</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-white dark:bg-slate-950 py-4 text-center text-xs text-gray-500 dark:text-gray-500 border-t border-gray-100 dark:border-slate-900">
+        <p class="lang-en">© 2026 PM POSHAN Portal, Department of School Education, Government of Maharashtra. Powered by Team Techno Master.</p>
+        <p class="lang-mr hidden">© २०२६ पीएम पोषण पोर्टल, शालेय शिक्षण विभाग, महाराष्ट्र शासन. टीम टेक्नो मास्टर द्वारे संचलित.</p>
+    </footer>
+
+    <!-- INTERACTIVE SCRIPTS -->
+    <script>
+        // Language State Controller
+        let currentLang = 'en';
+        function toggleLanguage() {
+            const englishElements = document.querySelectorAll('.lang-en');
+            const marathiElements = document.querySelectorAll('.lang-mr');
+            const langBtnText = document.getElementById('langBtnText');
+
+            if (currentLang === 'en') {
+                englishElements.forEach(el => el.classList.add('hidden'));
+                marathiElements.forEach(el => el.classList.remove('hidden'));
+                langBtnText.innerText = 'English';
+                currentLang = 'mr';
+                document.documentElement.lang = 'mr';
+            } else {
+                marathiElements.forEach(el => el.classList.add('hidden'));
+                englishElements.forEach(el => el.classList.remove('hidden'));
+                langBtnText.innerText = 'मराठी';
+                currentLang = 'en';
+                document.documentElement.lang = 'en';
+            }
+        }
+
+        // Dark Mode Controller
+        function toggleDarkMode() {
+            const htmlClassList = document.documentElement.classList;
+            const icon = document.getElementById('darkModeIcon');
+            
+            if (htmlClassList.contains('dark')) {
+                htmlClassList.remove('dark');
+                icon.className = 'fa-solid fa-moon text-lg';
+            } else {
+                htmlClassList.add('dark');
+                icon.className = 'fa-solid fa-sun text-lg';
+            }
+        }
+    </script>
+</body>
+</html>
